@@ -3,29 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Programming.Model;
 
-namespace Programming.Model
+namespace Programming
 {
     internal class Point2D
     {
-        private readonly int _x;
-        private readonly int _y;
+        private int _x;
+        private int _y;
 
         public int X
         {
             get { return _x; }
-            private set
+            set
             {
                 Validator.AssertOnPositiveValue(value);
+                _x = value;
             }
         }
 
         public int Y
         {
-             private set
+            set
             {
                 Validator.AssertOnPositiveValue(value);
+                _y = value;
             }
             get { return _y; }
         }
@@ -33,7 +34,7 @@ namespace Programming.Model
         public Point2D(int x, int y)
         {
             X = x;
-            Y = y; 
+            Y = y;
         }
         public Point2D() { }
     }

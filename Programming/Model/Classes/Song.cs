@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Programming.Model;
+using Programming;
 
 namespace Programming
 {

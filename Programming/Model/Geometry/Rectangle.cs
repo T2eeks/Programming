@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Programming.Model;
+using Programming;
 
-namespace Programming
-{
+namespace Programming 
+{ 
     internal class Rectangle
     {
         private double _length;
         private double _width;
         private string _color;
         private Point2D _point;
+        private static int _allRectanglesCount = 0;
+        private int _id;
 
         public double Length
         {
@@ -46,17 +48,32 @@ namespace Programming
             }
             get { return _color; }
         }
+        public int Id
+        {
+            get { return _id; }
+        }
 
-        public Point2D Center {get; set;}
+        public Point2D Center { get; set; }
 
-        public Rectangle(double lenght, double width, string color, Point2D center)
+        public int AllRectanglesCount
+        {
+            get { return _allRectanglesCount; }
+        }
+
+        public Rectangle(double lenght, double width, string color, int X, int Y)
         {
             Length = lenght;
             Width = width;
             Color = color;
-            Center = center;
+            Center = new Point2D(X, Y);
+            _id = _allRectanglesCount++;
         }
         public Rectangle() { }
+
+        public override string ToString()
+        {
+            return $" ID; {Id}; X; {Center.X}; Y; {Center.Y}; H; {_length}; W;{_width}; ";
+        }
 
     }
 }
