@@ -7,10 +7,17 @@ using Programming;
 
 namespace Programming
 {
+    /// <summary>
+    /// Хранит данные о фигуре.
+    /// </summary>
     internal class RectangleFactory
     {
         static Random random = new Random();
 
+        /// <summary>
+        /// Генерирует новый объект типа Rectangle.
+        /// </summary>
+        /// <returns>Новый сгенерированный  объект типа Rectangle.</returns>
         static public Rectangle Randomize()
         {
 
