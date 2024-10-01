@@ -20,7 +20,7 @@ namespace Programming.View.Panels
         {
             InitializeComponent ();
 
-            Random random = new Random();
+            Random  random = new Random();
             _rectangle = new Rectangle[5];
 
             for (int i = 0; i < _rectangle.Length; i++)
