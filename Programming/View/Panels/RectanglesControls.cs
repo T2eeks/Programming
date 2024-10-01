@@ -18,7 +18,7 @@ namespace Programming.View.Panels
 
         public RectanglesControls()
         {
-            InitializeComponent();
+            InitializeComponent ();
 
             Random random = new Random();
             _rectangle = new Rectangle[5];
