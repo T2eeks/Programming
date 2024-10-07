@@ -30,11 +30,13 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (ItemsListBox.SelectedIndex >= 0 && ItemsListBox.SelectedIndex < _items.Count)
             {
+
                 _item = _items[ItemsListBox.SelectedIndex];
                 NameTextBox.Text = _item.Name;
                 DescriptionTextBox.Text = _item.Info;
                 CostTextBox.Text = Convert.ToString(_item.Cost);
                 IdTextBox.Text = Convert.ToString(_item.Id);
+                NameTextBox.BackColor = Color.White;
             }
         }
 
@@ -47,7 +49,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 if (ItemsListBox.SelectedIndex >= 0)
                 {
                     _items[ItemsListBox.SelectedIndex].Name = NameTextBox.Text;
-                    ItemsListBox.Items[ItemsListBox.SelectedIndex] = (_items[ItemsListBox.SelectedIndex].Name + " стоит - " + _items[ItemsListBox.SelectedIndex].Cost + " Рублей.");
+                    UpdateItemData();
                 }
             }
             catch
@@ -65,7 +67,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 if (ItemsListBox.SelectedIndex >= 0)
                 {
                     _items[ItemsListBox.SelectedIndex].Info = DescriptionTextBox.Text;
-                    ItemsListBox.Items[ItemsListBox.SelectedIndex] = (_items[ItemsListBox.SelectedIndex].Name + " стоит - " + _items[ItemsListBox.SelectedIndex].Cost + " Рублей.");
+                    UpdateItemData();
                 }
             }
             catch
@@ -84,7 +86,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 if (ItemsListBox.SelectedIndex >= 0)
                 {
                     _items[ItemsListBox.SelectedIndex].Cost = Convert.ToDouble(CostTextBox.Text);
-                    ItemsListBox.Items[ItemsListBox.SelectedIndex] = (_items[ItemsListBox.SelectedIndex].Name + " стоит - " + _items[ItemsListBox.SelectedIndex].Cost + " Рублей.");
+                    UpdateItemData();
                 }
             }
             catch
@@ -125,7 +127,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             try
             {
-                Item addItem = new Item( NameTextBox.Text, DescriptionTextBox.Text,Convert.ToDouble(CostTextBox.Text));
+                Item addItem = new Item(NameTextBox.Text, DescriptionTextBox.Text, Convert.ToDouble(CostTextBox.Text));
                 _items.Add(addItem);
                 ItemsListBox.Items.Add(addItem.Name + " стоит - " + addItem.Cost + " Рублей.");
 
@@ -152,10 +154,36 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void ItemsTab_Click(object sender, EventArgs e)
         {
-            if (ItemsListBox.SelectedIndex >= 0 &&
-                    ItemsListBox.SelectedIndex
-                    < _items.Count
-                    )
+            
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UpdateItemsListBox(int index)
+        {
+            ItemsListBox.Items[index] = $"{_items[index].Name} стоит - {_items[index].Cost}";
+        }
+        private void UpdateItemData()
+        {
+            if (ItemsListBox.SelectedIndex >= 0)
+            {
+                _items[ItemsListBox.SelectedIndex].Name = NameTextBox.Text;
+                _items[ItemsListBox.SelectedIndex].Info = DescriptionTextBox.Text;
+                _items[ItemsListBox.SelectedIndex].Cost = Convert.ToDouble(CostTextBox.Text);
+                UpdateItemsListBox(ItemsListBox.SelectedIndex);
+            }
+        }
+
+        private void panel2_Click(object sender, EventArgs e)
+        {
+            ClearingFields();
+        }
+        private void ClearingFields()
+        {
+            if (ItemsListBox.SelectedIndex >= 0 && ItemsListBox.SelectedIndex < _items.Count)
             {
                 ItemsListBox.SetSelected(0, false);
                 NameTextBox.Text = "";
@@ -163,8 +191,12 @@ namespace ObjectOrientedPractics.View.Tabs
                 CostTextBox.Text = "";
                 IdTextBox.Text = "";
                 CostTextBox.BackColor = Color.White;
-                
+                NameTextBox.BackColor = Color.White;
+
             }
         }
+
+
+
     }
 }

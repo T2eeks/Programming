@@ -110,6 +110,7 @@
             IdTextBox.ReadOnly = true;
             IdTextBox.Size = new Size(161, 27);
             IdTextBox.TabIndex = 16;
+            IdTextBox.TextChanged += IdTextBox_TextChanged;
             // 
             // RemoveButton
             // 

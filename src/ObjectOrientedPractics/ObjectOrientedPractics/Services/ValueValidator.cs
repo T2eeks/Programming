@@ -10,7 +10,7 @@ namespace ObjectOrientedPractics.Services
     {
         public static void AssertStringOnLength(string value, int maxLength, string propertyName)
         {
-            if (value.Length < 0 || value.Length > maxLength)
+            if (value.Length > maxLength)
             {
                 throw new ArgumentException($"{nameof(propertyName)} должен быть не меньше 0 и не больше {maxLength} символов.");
             }

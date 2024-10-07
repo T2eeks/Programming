@@ -37,12 +37,10 @@ namespace ObjectOrientedPractics
             }
             get { return _address; }
         }   
-        public Customer()
-        {
-            _id = _nextid++;
-        }
+        
         public Customer(string fullname,string address)
         {
+            _id= _nextid++;
             FullName = fullname;
             Address = address;
         }

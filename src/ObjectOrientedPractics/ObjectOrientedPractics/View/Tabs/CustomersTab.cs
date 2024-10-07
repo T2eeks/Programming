@@ -28,7 +28,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 FullNameTextBox.Text = _customer.FullName;
                 AddressTextBox.Text = _customer.Address;
                 IdTextBox.Text = Convert.ToString(_customer.Id);
-                
+
             }
         }
 
@@ -41,7 +41,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 if (CustomersListBox.SelectedIndex >= 0)
                 {
                     _customers[CustomersListBox.SelectedIndex].FullName = FullNameTextBox.Text;
-                    CustomersListBox.Items[CustomersListBox.SelectedIndex] = _customers[CustomersListBox.SelectedIndex].FullName + " проживает по адресу" + _customers[CustomersListBox.SelectedIndex].Address;
+                    UpdateCustomerData();
                 }
             }
             catch
@@ -57,7 +57,7 @@ namespace ObjectOrientedPractics.View.Tabs
             if (CustomersListBox.SelectedIndex >= 0)
             {
                 _customers[CustomersListBox.SelectedIndex].Address = AddressTextBox.Text;
-                CustomersListBox.Items[CustomersListBox.SelectedIndex] = _customers[CustomersListBox.SelectedIndex].FullName + " проживает по адресу" + _customers[CustomersListBox.SelectedIndex].Address;
+                UpdateCustomerData();
             }
         }
 
@@ -67,7 +67,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 Customer addCustomer = new Customer(FullNameTextBox.Text, AddressTextBox.Text);
                 if (AddressTextBox.Text != "")
-                { 
+                {
                     _customers.Add(addCustomer);
                     CustomersListBox.Items.Add(addCustomer.FullName + " проживает по адресу " + addCustomer.Address);
                     FullNameTextBox.Text = "";
@@ -104,17 +104,35 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void CustomersTab_Click(object sender, EventArgs e)
         {
-            if (CustomersListBox.SelectedIndex >= 0 &&
-                    CustomersListBox.SelectedIndex
-                    < _customers.Count
-                    )
+            ClearingFields();
+        }
+
+        private void UpdateCustomersListBox(int index)
+        {
+            CustomersListBox.Items[index] = $"{_customers[index].FullName} проживает по адресу {_customers[index].Address}";
+        }
+
+        private void UpdateCustomerData()
+        {
+            if (CustomersListBox.SelectedIndex >= 0)
+            {
+                _customers[CustomersListBox.SelectedIndex].FullName = FullNameTextBox.Text;
+                _customers[CustomersListBox.SelectedIndex].Address = AddressTextBox.Text;
+                UpdateCustomersListBox(CustomersListBox.SelectedIndex);
+            }
+        }
+        private void ClearingFields()
+        {
+            if (CustomersListBox.SelectedIndex >= 0 && CustomersListBox.SelectedIndex < _customers.Count)
             {
                 CustomersListBox.SetSelected(0, false);
                 AddressTextBox.Text = "";
                 FullNameTextBox.Text = "";
-  
-
             }
+        }
+        private void IdTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -50,17 +50,15 @@ namespace ObjectOrientedPractics
             get { return _cost; }
         }
 
-        public Item()
-        {
-            _id = _nextId++;
-        }
 
         public Item(string name, string info, double cost)
         {
             
+            _id = _nextId++;
             Name = name;
             Info = info;
             Cost = cost;
+
         }
   
     }
