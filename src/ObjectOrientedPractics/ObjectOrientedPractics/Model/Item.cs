@@ -9,18 +9,47 @@ using ObjectOrientedPractics.Services;
 
 namespace ObjectOrientedPractics
 {
+    /// <summary>
+    /// Представляет товар в системе
+    /// </summary>
     internal class Item
     {
+        /// <summary>
+        /// Хранит следующее доступное значение идентификатора для новых товаров
+        /// </summary>
         private static int _nextId = 1;
+
+        /// <summary>
+        /// Хранит уникальный идентификатор товара
+        /// </summary>
         private readonly int _id;
+
+        /// <summary>
+        /// Хранит название товара.
+        /// </summary>
         private string _name;
+
+        /// <summary>
+        /// Хранит описание товара
+        /// </summary>
         private string _info;
+
+        /// <summary>
+        /// Хранит стоимость товара
+        /// </summary>
         private double _cost;
 
+        /// <summary>
+        /// Возвращает уникальный идентификатор товара
+        /// </summary>
         public int Id
         {
             get { return _id; }
         }
+
+        /// <summary>
+        /// Возвращает и задает название товара. Должно содержать не более 200 символов
+        /// </summary>
         public string Name
         {
             set
@@ -31,6 +60,9 @@ namespace ObjectOrientedPractics
             get { return _name; }
         }
 
+        /// <summary>
+        /// Возвращает и задает описание товара. Должно содержать не более 1000 символов
+        /// </summary>
         public string Info
         {
             set
@@ -40,6 +72,10 @@ namespace ObjectOrientedPractics
             }
             get { return _info; }
         }
+
+        /// <summary>
+        /// Возвращает и задает стоимость товара. Должна быть положительной и не превышать 100000
+        /// </summary>
         public double Cost
         {
             set
@@ -50,16 +86,18 @@ namespace ObjectOrientedPractics
             get { return _cost; }
         }
 
-
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Item"/> с указанным названием, описанием и стоимостью.
+        /// </summary>
+        /// <param name="name">Название товара.</param>
+        /// <param name="info">Описание товара.</param>
+        /// <param name="cost">Стоимость товара.</param>
         public Item(string name, string info, double cost)
         {
-            
             _id = _nextId++;
             Name = name;
             Info = info;
             Cost = cost;
-
         }
-  
     }
 }

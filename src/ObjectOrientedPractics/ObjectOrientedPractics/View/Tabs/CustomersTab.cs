@@ -28,6 +28,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 FullNameTextBox.Text = _customer.FullName;
                 AddressTextBox.Text = _customer.Address;
                 IdTextBox.Text = Convert.ToString(_customer.Id);
+                
 
             }
         }
@@ -41,7 +42,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 if (CustomersListBox.SelectedIndex >= 0)
                 {
                     _customers[CustomersListBox.SelectedIndex].FullName = FullNameTextBox.Text;
-                    UpdateCustomerData();
+                    UpdateCustomersListBox(CustomersListBox.SelectedIndex);
                 }
             }
             catch
@@ -52,12 +53,15 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void AddressTextBox_TextChanged(object sender, EventArgs e)
         {
+            
+
             AddressTextBox.BackColor = Color.White;
             ValueValidator.AssertStringOnLength(AddressTextBox.Text, 500, nameof(Customer.Address));
             if (CustomersListBox.SelectedIndex >= 0)
             {
                 _customers[CustomersListBox.SelectedIndex].Address = AddressTextBox.Text;
-                UpdateCustomerData();
+                UpdateCustomersListBox(CustomersListBox.SelectedIndex);
+
             }
         }
 
@@ -107,25 +111,24 @@ namespace ObjectOrientedPractics.View.Tabs
             ClearingFields();
         }
 
+        /// <summary>
+        /// Обновляет информацию в элементе списка после редактирования адресса и имени клиента
+        /// </summary>
+        /// <param name="index">Индекс товара в списке, который нужно обновить.</param>
         private void UpdateCustomersListBox(int index)
         {
             CustomersListBox.Items[index] = $"{_customers[index].FullName} проживает по адресу {_customers[index].Address}";
         }
 
-        private void UpdateCustomerData()
-        {
-            if (CustomersListBox.SelectedIndex >= 0)
-            {
-                _customers[CustomersListBox.SelectedIndex].FullName = FullNameTextBox.Text;
-                _customers[CustomersListBox.SelectedIndex].Address = AddressTextBox.Text;
-                UpdateCustomersListBox(CustomersListBox.SelectedIndex);
-            }
-        }
+        /// <summary>
+        /// Очищает поля ввода данных о клиенте
+        /// </summary>
         private void ClearingFields()
         {
             if (CustomersListBox.SelectedIndex >= 0 && CustomersListBox.SelectedIndex < _customers.Count)
             {
                 CustomersListBox.SetSelected(0, false);
+                IdTextBox.Text = "";
                 AddressTextBox.Text = "";
                 FullNameTextBox.Text = "";
             }

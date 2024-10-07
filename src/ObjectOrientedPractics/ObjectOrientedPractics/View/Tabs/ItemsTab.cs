@@ -37,6 +37,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 CostTextBox.Text = Convert.ToString(_item.Cost);
                 IdTextBox.Text = Convert.ToString(_item.Id);
                 NameTextBox.BackColor = Color.White;
+                
             }
         }
 
@@ -49,7 +50,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 if (ItemsListBox.SelectedIndex >= 0)
                 {
                     _items[ItemsListBox.SelectedIndex].Name = NameTextBox.Text;
-                    UpdateItemData();
+                    UpdateItemsListBox(ItemsListBox.SelectedIndex);
                 }
             }
             catch
@@ -67,7 +68,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 if (ItemsListBox.SelectedIndex >= 0)
                 {
                     _items[ItemsListBox.SelectedIndex].Info = DescriptionTextBox.Text;
-                    UpdateItemData();
+                    
                 }
             }
             catch
@@ -86,7 +87,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 if (ItemsListBox.SelectedIndex >= 0)
                 {
                     _items[ItemsListBox.SelectedIndex].Cost = Convert.ToDouble(CostTextBox.Text);
-                    UpdateItemData();
+                    UpdateItemsListBox(ItemsListBox.SelectedIndex);
                 }
             }
             catch
@@ -129,7 +130,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 Item addItem = new Item(NameTextBox.Text, DescriptionTextBox.Text, Convert.ToDouble(CostTextBox.Text));
                 _items.Add(addItem);
-                ItemsListBox.Items.Add(addItem.Name + " стоит - " + addItem.Cost + " Рублей.");
+                ItemsListBox.Items.Add(addItem.Name + " стоит - " + addItem.Cost);
 
                 NameTextBox.Text = "";
                 DescriptionTextBox.Text = "";
@@ -162,25 +163,24 @@ namespace ObjectOrientedPractics.View.Tabs
 
         }
 
+
+        /// <summary>
+        /// Обновляет информацию в элементе списка после редактирования товара
+        /// </summary>
+        /// <param name="index">Индекс товара в списке, который нужно обновить</param>
         private void UpdateItemsListBox(int index)
         {
             ItemsListBox.Items[index] = $"{_items[index].Name} стоит - {_items[index].Cost}";
-        }
-        private void UpdateItemData()
-        {
-            if (ItemsListBox.SelectedIndex >= 0)
-            {
-                _items[ItemsListBox.SelectedIndex].Name = NameTextBox.Text;
-                _items[ItemsListBox.SelectedIndex].Info = DescriptionTextBox.Text;
-                _items[ItemsListBox.SelectedIndex].Cost = Convert.ToDouble(CostTextBox.Text);
-                UpdateItemsListBox(ItemsListBox.SelectedIndex);
-            }
         }
 
         private void panel2_Click(object sender, EventArgs e)
         {
             ClearingFields();
         }
+
+        /// <summary>
+        /// Очищает поля ввода данных о товаре.
+        /// </summary>
         private void ClearingFields()
         {
             if (ItemsListBox.SelectedIndex >= 0 && ItemsListBox.SelectedIndex < _items.Count)

@@ -44,7 +44,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(419, 3);
+            label5.Location = new Point(382, 3);
             label5.Name = "label5";
             label5.Size = new Size(133, 20);
             label5.TabIndex = 25;
@@ -62,7 +62,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(403, 127);
+            label2.Location = new Point(366, 127);
             label2.Name = "label2";
             label2.Size = new Size(65, 20);
             label2.TabIndex = 22;
@@ -71,7 +71,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(403, 74);
+            label1.Location = new Point(366, 74);
             label1.Name = "label1";
             label1.Size = new Size(79, 20);
             label1.TabIndex = 21;
@@ -80,7 +80,7 @@
             // ID
             // 
             ID.AutoSize = true;
-            ID.Location = new Point(403, 26);
+            ID.Location = new Point(366, 26);
             ID.Name = "ID";
             ID.Size = new Size(27, 20);
             ID.TabIndex = 20;
@@ -88,24 +88,24 @@
             // 
             // AddressTextBox
             // 
-            AddressTextBox.Location = new Point(487, 127);
+            AddressTextBox.Location = new Point(366, 159);
             AddressTextBox.Multiline = true;
             AddressTextBox.Name = "AddressTextBox";
-            AddressTextBox.Size = new Size(514, 149);
+            AddressTextBox.Size = new Size(355, 123);
             AddressTextBox.TabIndex = 18;
             AddressTextBox.TextChanged += AddressTextBox_TextChanged;
             // 
             // FullNameTextBox
             // 
-            FullNameTextBox.Location = new Point(487, 71);
+            FullNameTextBox.Location = new Point(450, 71);
             FullNameTextBox.Name = "FullNameTextBox";
-            FullNameTextBox.Size = new Size(476, 27);
+            FullNameTextBox.Size = new Size(271, 27);
             FullNameTextBox.TabIndex = 17;
             FullNameTextBox.TextChanged += FullNameTextBox_TextChanged;
             // 
             // IdTextBox
             // 
-            IdTextBox.Location = new Point(487, 26);
+            IdTextBox.Location = new Point(450, 26);
             IdTextBox.Name = "IdTextBox";
             IdTextBox.ReadOnly = true;
             IdTextBox.Size = new Size(161, 27);
@@ -114,9 +114,9 @@
             // 
             // RemoveButton
             // 
-            RemoveButton.Location = new Point(143, 593);
+            RemoveButton.Location = new Point(105, 496);
             RemoveButton.Name = "RemoveButton";
-            RemoveButton.Size = new Size(134, 75);
+            RemoveButton.Size = new Size(96, 49);
             RemoveButton.TabIndex = 15;
             RemoveButton.Text = "Remove";
             RemoveButton.UseVisualStyleBackColor = true;
@@ -124,9 +124,9 @@
             // 
             // AddButton
             // 
-            AddButton.Location = new Point(3, 593);
+            AddButton.Location = new Point(3, 496);
             AddButton.Name = "AddButton";
-            AddButton.Size = new Size(134, 75);
+            AddButton.Size = new Size(96, 49);
             AddButton.TabIndex = 14;
             AddButton.Text = "Add";
             AddButton.UseVisualStyleBackColor = true;
@@ -138,7 +138,7 @@
             CustomersListBox.ItemHeight = 20;
             CustomersListBox.Location = new Point(3, 26);
             CustomersListBox.Name = "CustomersListBox";
-            CustomersListBox.Size = new Size(390, 544);
+            CustomersListBox.Size = new Size(340, 464);
             CustomersListBox.TabIndex = 13;
             CustomersListBox.SelectedIndexChanged += CustomersListBox_SelectedIndexChanged;
             // 
@@ -158,7 +158,7 @@
             Controls.Add(AddButton);
             Controls.Add(CustomersListBox);
             Name = "CustomersTab";
-            Size = new Size(1045, 673);
+            Size = new Size(775, 551);
             Click += CustomersTab_Click;
             ResumeLayout(false);
             PerformLayout();

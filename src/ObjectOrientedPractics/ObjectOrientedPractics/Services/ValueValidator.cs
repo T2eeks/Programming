@@ -12,14 +12,14 @@ namespace ObjectOrientedPractics.Services
         {
             if (value.Length > maxLength)
             {
-                throw new ArgumentException($"{nameof(propertyName)} должен быть не меньше 0 и не больше {maxLength} символов.");
+                throw new ArgumentException($"{nameof(propertyName)} должен быть не больше {maxLength} символов.");
             }
         }
 
         public static void AssertOnPositiveValue(double value, double maxValue, string propertyName)
         {
             if (value <= 0 || value > maxValue)
-                throw new ArgumentException($"{nameof(propertyName)} должна быть не меньше 0 и не больше {maxValue} символов.");
+                throw new ArgumentException($"{nameof(propertyName)} должен быть не меньше 0 и не больше {maxValue} символов.");
         }
     }
 }

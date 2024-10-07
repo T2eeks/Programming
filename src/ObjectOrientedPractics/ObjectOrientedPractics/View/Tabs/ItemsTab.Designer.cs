@@ -53,16 +53,16 @@
             ItemsListBox.ItemHeight = 20;
             ItemsListBox.Location = new Point(3, 26);
             ItemsListBox.Name = "ItemsListBox";
-            ItemsListBox.Size = new Size(390, 564);
+            ItemsListBox.Size = new Size(350, 424);
             ItemsListBox.TabIndex = 0;
             ItemsListBox.Click += ItemsListBox_Click;
             ItemsListBox.SelectedIndexChanged += ItemsListBox_SelectedIndexChanged;
             // 
             // AddButton
             // 
-            AddButton.Location = new Point(3, 593);
+            AddButton.Location = new Point(3, 456);
             AddButton.Name = "AddButton";
-            AddButton.Size = new Size(137, 84);
+            AddButton.Size = new Size(106, 54);
             AddButton.TabIndex = 1;
             AddButton.Text = "Add";
             AddButton.UseVisualStyleBackColor = true;
@@ -70,9 +70,9 @@
             // 
             // RemoveButton
             // 
-            RemoveButton.Location = new Point(146, 593);
+            RemoveButton.Location = new Point(115, 456);
             RemoveButton.Name = "RemoveButton";
-            RemoveButton.Size = new Size(137, 84);
+            RemoveButton.Size = new Size(106, 54);
             RemoveButton.TabIndex = 2;
             RemoveButton.Text = "Remove";
             RemoveButton.UseVisualStyleBackColor = true;
@@ -97,19 +97,19 @@
             // 
             // NameTextBox
             // 
-            NameTextBox.Location = new Point(80, 122);
+            NameTextBox.Location = new Point(10, 148);
             NameTextBox.Multiline = true;
             NameTextBox.Name = "NameTextBox";
-            NameTextBox.Size = new Size(507, 143);
+            NameTextBox.Size = new Size(407, 79);
             NameTextBox.TabIndex = 5;
             NameTextBox.TextChanged += NameTextBox_TextChanged;
             // 
             // DescriptionTextBox
             // 
-            DescriptionTextBox.Location = new Point(80, 317);
+            DescriptionTextBox.Location = new Point(10, 326);
             DescriptionTextBox.Multiline = true;
             DescriptionTextBox.Name = "DescriptionTextBox";
-            DescriptionTextBox.Size = new Size(507, 143);
+            DescriptionTextBox.Size = new Size(407, 79);
             DescriptionTextBox.TabIndex = 6;
             DescriptionTextBox.TextChanged += DescriptionTextBox_TextChanged;
             // 
@@ -163,7 +163,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(0, 0);
+            label5.Location = new Point(0, 3);
             label5.Name = "label5";
             label5.Size = new Size(100, 20);
             label5.TabIndex = 12;
@@ -175,10 +175,12 @@
             panel1.Controls.Add(AddButton);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(RemoveButton);
-            panel1.Location = new Point(3, 13);
+            panel1.Dock = DockStyle.Left;
+            panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(399, 721);
+            panel1.Size = new Size(367, 568);
             panel1.TabIndex = 13;
+            panel1.Click += panel2_Click;
             // 
             // panel2
             // 
@@ -191,9 +193,10 @@
             panel2.Controls.Add(label1);
             panel2.Controls.Add(NameTextBox);
             panel2.Controls.Add(label3);
-            panel2.Location = new Point(421, 13);
+            panel2.Dock = DockStyle.Right;
+            panel2.Location = new Point(379, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(605, 721);
+            panel2.Size = new Size(464, 568);
             panel2.TabIndex = 14;
             panel2.Click += panel2_Click;
             // 
@@ -204,7 +207,7 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "ItemsTab";
-            Size = new Size(1042, 759);
+            Size = new Size(843, 568);
             Click += ItemsTab_Click;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
