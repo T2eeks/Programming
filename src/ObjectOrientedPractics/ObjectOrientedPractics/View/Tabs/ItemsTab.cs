@@ -19,7 +19,8 @@ namespace ObjectOrientedPractics.View.Tabs
         public ItemsTab()
         {
             InitializeComponent();
-            
+            CategoryComboBox.Items.AddRange(Enum.GetValues(typeof(Category)).Cast<object>().ToArray());
+
         }
 
         private void ID_Click(object sender, EventArgs e)
@@ -37,10 +38,11 @@ namespace ObjectOrientedPractics.View.Tabs
                 DescriptionTextBox.Text = _item.Info;
                 CostTextBox.Text = Convert.ToString(_item.Cost);
                 IdTextBox.Text = Convert.ToString(_item.Id);
+                
                 NameTextBox.BackColor = Color.White;
 
                 CategoryComboBox.SelectedItem = _item.Category;
-                CategoryComboBox.Items.AddRange(Enum.GetValues(typeof(Category)).Cast<object>().ToArray());
+               
 
             }
         }
@@ -116,11 +118,14 @@ namespace ObjectOrientedPractics.View.Tabs
                 DescriptionTextBox.Text = "";
                 CostTextBox.Text = "";
                 IdTextBox.Text = "";
+                CategoryComboBox.Items.Clear();
 
                 NameTextBox.BackColor = Color.White;
                 DescriptionTextBox.BackColor = Color.White;
                 CostTextBox.BackColor = Color.White;
                 IdTextBox.BackColor = Color.White;
+
+                CategoryComboBox.Items.AddRange(Enum.GetValues(typeof(Category)).Cast<object>().ToArray());
             }
             catch (Exception ex)
             {
@@ -141,6 +146,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 DescriptionTextBox.Text = "";
                 CostTextBox.Text = "";
                 IdTextBox.Text = "";
+                CategoryComboBox.Items.Clear();
                 
 
 
@@ -148,6 +154,8 @@ namespace ObjectOrientedPractics.View.Tabs
                 DescriptionTextBox.BackColor = Color.White;
                 CostTextBox.BackColor = Color.White;
                 IdTextBox.BackColor = Color.White;
+
+                CategoryComboBox.Items.AddRange(Enum.GetValues(typeof(Category)).Cast<object>().ToArray());
             }
             catch (Exception ex)
             {
@@ -201,6 +209,8 @@ namespace ObjectOrientedPractics.View.Tabs
                 NameTextBox.BackColor = Color.White;
                 CategoryComboBox.Items.Clear();
 
+                CategoryComboBox.Items.AddRange(Enum.GetValues(typeof(Category)).Cast<object>().ToArray());
+
             }
         }
 
@@ -208,10 +218,10 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (ItemsListBox.SelectedIndex >= 0 && ItemsListBox.SelectedIndex < _items.Count)
             {
-                
+
                 _item.Category = (Category)CategoryComboBox.SelectedItem;
 
-                
+
                 UpdateItemsListBox(ItemsListBox.SelectedIndex);
             }
         }
