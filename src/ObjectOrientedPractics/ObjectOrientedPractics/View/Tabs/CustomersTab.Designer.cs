@@ -158,7 +158,7 @@
             Controls.Add(AddButton);
             Controls.Add(CustomersListBox);
             Name = "CustomersTab";
-            Size = new Size(775, 551);
+            Size = new Size(1232, 585);
             Click += CustomersTab_Click;
             ResumeLayout(false);
             PerformLayout();
