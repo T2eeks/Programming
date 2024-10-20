@@ -43,6 +43,8 @@
             label5 = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
+            label6 = new Label();
+            CategoryComboBox = new ComboBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -97,7 +99,7 @@
             // 
             // NameTextBox
             // 
-            NameTextBox.Location = new Point(10, 148);
+            NameTextBox.Location = new Point(7, 189);
             NameTextBox.Multiline = true;
             NameTextBox.Name = "NameTextBox";
             NameTextBox.Size = new Size(407, 79);
@@ -106,7 +108,7 @@
             // 
             // DescriptionTextBox
             // 
-            DescriptionTextBox.Location = new Point(10, 326);
+            DescriptionTextBox.Location = new Point(7, 367);
             DescriptionTextBox.Multiline = true;
             DescriptionTextBox.Name = "DescriptionTextBox";
             DescriptionTextBox.Size = new Size(407, 79);
@@ -135,7 +137,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(10, 127);
+            label2.Location = new Point(7, 168);
             label2.Name = "label2";
             label2.Size = new Size(52, 20);
             label2.TabIndex = 9;
@@ -144,7 +146,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(7, 294);
+            label3.Location = new Point(4, 335);
             label3.Name = "label3";
             label3.Size = new Size(88, 20);
             label3.TabIndex = 10;
@@ -184,6 +186,8 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(label6);
+            panel2.Controls.Add(CategoryComboBox);
             panel2.Controls.Add(IdTextBox);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(ID);
@@ -199,6 +203,26 @@
             panel2.Size = new Size(464, 568);
             panel2.TabIndex = 14;
             panel2.Click += panel2_Click;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(7, 121);
+            label6.Name = "label6";
+            label6.Size = new Size(72, 20);
+            label6.TabIndex = 14;
+            label6.Text = "Category:";
+            // 
+            // CategoryComboBox
+            // 
+            CategoryComboBox.AutoCompleteCustomSource.AddRange(new string[] { "Electronics,", "Clothes,", "Foodstuffs,", "Cosmetics,", "Furniture,", "Books,", "Decorations" });
+            CategoryComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            CategoryComboBox.FormattingEnabled = true;
+            CategoryComboBox.Location = new Point(80, 118);
+            CategoryComboBox.Name = "CategoryComboBox";
+            CategoryComboBox.Size = new Size(151, 28);
+            CategoryComboBox.TabIndex = 13;
+            CategoryComboBox.SelectedIndexChanged += CategoryComboBox_SelectedIndexChanged;
             // 
             // ItemsTab
             // 
@@ -233,5 +257,7 @@
         private Label label5;
         private Panel panel1;
         private Panel panel2;
+        private Label label6;
+        private ComboBox CategoryComboBox;
     }
 }

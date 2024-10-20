@@ -19,6 +19,7 @@ namespace ObjectOrientedPractics.View.Tabs
         public ItemsTab()
         {
             InitializeComponent();
+            
         }
 
         private void ID_Click(object sender, EventArgs e)
@@ -37,7 +38,10 @@ namespace ObjectOrientedPractics.View.Tabs
                 CostTextBox.Text = Convert.ToString(_item.Cost);
                 IdTextBox.Text = Convert.ToString(_item.Id);
                 NameTextBox.BackColor = Color.White;
-                
+
+                CategoryComboBox.SelectedItem = _item.Category;
+                CategoryComboBox.Items.AddRange(Enum.GetValues(typeof(Category)).Cast<object>().ToArray());
+
             }
         }
 
@@ -68,7 +72,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 if (ItemsListBox.SelectedIndex >= 0)
                 {
                     _items[ItemsListBox.SelectedIndex].Info = DescriptionTextBox.Text;
-                    
+
                 }
             }
             catch
@@ -128,7 +132,8 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             try
             {
-                Item addItem = new Item(NameTextBox.Text, DescriptionTextBox.Text, Convert.ToDouble(CostTextBox.Text));
+                Category selectedCategory = (Category)Enum.Parse(typeof(Category), CategoryComboBox.SelectedItem.ToString());
+                Item addItem = new Item(NameTextBox.Text, DescriptionTextBox.Text, Convert.ToDouble(CostTextBox.Text), selectedCategory);
                 _items.Add(addItem);
                 ItemsListBox.Items.Add(addItem.Name + " стоит - " + addItem.Cost);
 
@@ -136,6 +141,8 @@ namespace ObjectOrientedPractics.View.Tabs
                 DescriptionTextBox.Text = "";
                 CostTextBox.Text = "";
                 IdTextBox.Text = "";
+                
+
 
                 NameTextBox.BackColor = Color.White;
                 DescriptionTextBox.BackColor = Color.White;
@@ -155,7 +162,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void ItemsTab_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -192,11 +199,21 @@ namespace ObjectOrientedPractics.View.Tabs
                 IdTextBox.Text = "";
                 CostTextBox.BackColor = Color.White;
                 NameTextBox.BackColor = Color.White;
+                CategoryComboBox.Items.Clear();
 
             }
         }
 
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ItemsListBox.SelectedIndex >= 0 && ItemsListBox.SelectedIndex < _items.Count)
+            {
+                
+                _item.Category = (Category)CategoryComboBox.SelectedItem;
 
-
+                
+                UpdateItemsListBox(ItemsListBox.SelectedIndex);
+            }
+        }
     }
 }

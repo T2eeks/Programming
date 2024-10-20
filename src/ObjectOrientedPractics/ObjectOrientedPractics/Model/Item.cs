@@ -87,17 +87,24 @@ namespace ObjectOrientedPractics
         }
 
         /// <summary>
+        /// Возвращает и задает категорию товара.
+        /// </summary>
+        public Category Category { get; set; }
+
+        /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Item"/> с указанным названием, описанием и стоимостью.
         /// </summary>
         /// <param name="name">Название товара.</param>
         /// <param name="info">Описание товара.</param>
         /// <param name="cost">Стоимость товара.</param>
-        public Item(string name, string info, double cost)
+        /// <param name="category">Категория товара. </param>
+        public Item(string name, string info, double cost, Category category)
         {
             _id = _nextId++;
             Name = name;
             Info = info;
             Cost = cost;
+            Category = category;
         }
     }
 }
