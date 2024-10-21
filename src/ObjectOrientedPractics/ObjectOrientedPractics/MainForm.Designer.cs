@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            tabPage2 = new TabPage();
             itemsTab1 = new View.Tabs.ItemsTab();
+            tabPage2 = new TabPage();
             customersTab1 = new View.Tabs.CustomersTab();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -59,6 +60,14 @@
             tabPage1.Text = "Items";
             tabPage1.UseVisualStyleBackColor = true;
             // 
+            // itemsTab1
+            // 
+            itemsTab1.Location = new Point(3, 6);
+            itemsTab1.Name = "itemsTab1";
+            itemsTab1.Size = new Size(838, 529);
+            itemsTab1.TabIndex = 0;
+            itemsTab1.Load += itemsTab1_Load;
+            // 
             // tabPage2
             // 
             tabPage2.Controls.Add(customersTab1);
@@ -70,25 +79,18 @@
             tabPage2.Text = "Customers";
             tabPage2.UseVisualStyleBackColor = true;
             // 
-            // itemsTab1
-            // 
-            itemsTab1.Location = new Point(3, 6);
-            itemsTab1.Name = "itemsTab1";
-            itemsTab1.Size = new Size(838, 529);
-            itemsTab1.TabIndex = 0;
-            // 
             // customersTab1
             // 
             customersTab1.Location = new Point(3, 6);
             customersTab1.Name = "customersTab1";
-            customersTab1.Size = new Size(790, 555);
+            customersTab1.Size = new Size(888, 555);
             customersTab1.TabIndex = 0;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(814, 581);
+            ClientSize = new Size(880, 587);
             Controls.Add(tabControl1);
             Name = "MainForm";
             Text = "Form1";

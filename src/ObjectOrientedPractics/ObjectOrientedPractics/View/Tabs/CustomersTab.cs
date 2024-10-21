@@ -1,4 +1,5 @@
-﻿using ObjectOrientedPractics.Services;
+﻿using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,17 @@ namespace ObjectOrientedPractics.View.Tabs
     {
         private List<Customer> _customers = new();
         private Customer _customer;
+
+        public List<Customer> Customers
+        { 
+            set
+            {
+                _customers = value;
+                UpdateCustomersListBox();
+            }
+            get { return _customers; }
+        }
+
         public CustomersTab()
         {
             InitializeComponent();
@@ -26,7 +38,9 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 _customer = _customers[CustomersListBox.SelectedIndex];
                 FullNameTextBox.Text = _customer.FullName;
-                AddressTextBox.Text = _customer.Address;
+
+                AddressControl.Address = _customer.Address;
+                
                 IdTextBox.Text = Convert.ToString(_customer.Id);
                 
 
@@ -51,33 +65,22 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
 
-        private void AddressTextBox_TextChanged(object sender, EventArgs e)
-        {
-            
-
-            AddressTextBox.BackColor = Color.White;
-            ValueValidator.AssertStringOnLength(AddressTextBox.Text, 500, nameof(Customer.Address));
-            if (CustomersListBox.SelectedIndex >= 0)
-            {
-                _customers[CustomersListBox.SelectedIndex].Address = AddressTextBox.Text;
-                UpdateCustomersListBox(CustomersListBox.SelectedIndex);
-
-            }
-        }
-
         private void AddButton_Click(object sender, EventArgs e)
         {
             try
             {
-                Customer addCustomer = new Customer(FullNameTextBox.Text, AddressTextBox.Text);
-                if (AddressTextBox.Text != "")
+
+                Customer addCustomer = new Customer(FullNameTextBox.Text, new Address(AddressControl.Address));
+                if (FullNameTextBox.Text != "")
                 {
                     _customers.Add(addCustomer);
-                    CustomersListBox.Items.Add(addCustomer.FullName + " проживает по адресу " + addCustomer.Address);
+                    CustomersListBox.Items.Add( "Гражданин " + addCustomer.FullName);
                     FullNameTextBox.Text = "";
-                    AddressTextBox.Text = "";
                     FullNameTextBox.BackColor = Color.White;
-                    AddressTextBox.BackColor = Color.White;
+
+                    AddressControl.Clear();
+
+                    
                 }
             }
             catch (Exception ex)
@@ -93,11 +96,11 @@ namespace ObjectOrientedPractics.View.Tabs
                 _customers.RemoveAt(CustomersListBox.SelectedIndex);
                 CustomersListBox.Items.RemoveAt(CustomersListBox.SelectedIndex);
 
-
                 FullNameTextBox.Text = "";
-                AddressTextBox.Text = "";
                 FullNameTextBox.BackColor = Color.White;
-                AddressTextBox.BackColor = Color.White;
+
+                AddressControl.Clear();
+
             }
             catch (Exception ex)
             {
@@ -117,7 +120,16 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <param name="index">Индекс товара в списке, который нужно обновить.</param>
         private void UpdateCustomersListBox(int index)
         {
-            CustomersListBox.Items[index] = $"{_customers[index].FullName} проживает по адресу {_customers[index].Address}";
+            CustomersListBox.Items[index] = $" Гражданин {_customers[index].FullName}";
+        }
+
+        private void UpdateCustomersListBox()
+        {
+            CustomersListBox.Items.Clear();
+            foreach (var item in _customers)
+            {
+                CustomersListBox.Items.Add($" Гражданин {item.FullName}");
+            }
         }
 
         /// <summary>
@@ -129,8 +141,11 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 CustomersListBox.SetSelected(0, false);
                 IdTextBox.Text = "";
-                AddressTextBox.Text = "";
                 FullNameTextBox.Text = "";
+
+                AddressControl.Clear();
+
+                FullNameTextBox.BackColor= Color.White;
             }
         }
         private void IdTextBox_TextChanged(object sender, EventArgs e)

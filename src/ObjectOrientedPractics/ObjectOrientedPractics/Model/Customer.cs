@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ObjectOrientedPractics.Model;
 using ObjectOrientedPractics.Services;
 
 namespace ObjectOrientedPractics
@@ -11,7 +12,7 @@ namespace ObjectOrientedPractics
     /// <summary>
     /// Представляет клиента в системе
     /// </summary>
-    internal class Customer
+    public class Customer
     {
         /// <summary>
         /// Хранит следующее доступное значение идентификатора для новых клиентов
@@ -31,7 +32,7 @@ namespace ObjectOrientedPractics
         /// <summary>
         /// Хранит адрес клиента
         /// </summary>
-        private string _address;
+        private Address _address;
 
         /// <summary>
         /// Возвращает уникальный идентификатор клиента
@@ -57,11 +58,10 @@ namespace ObjectOrientedPractics
         /// <summary>
         /// Возвращает и задает адрес клиента. Должно содержать не более 500 символов
         /// </summary>
-        public string Address
+        public Address Address
         {
             set
             {
-                ValueValidator.AssertStringOnLength(value, 500, nameof(Address));
                 _address = value;
             }
             get { return _address; }
@@ -72,7 +72,7 @@ namespace ObjectOrientedPractics
         /// </summary>
         /// <param name="fullname">Полное имя клиента </param>
         /// <param name="address">Адрес клиента </param>
-        public Customer(string fullname, string address)
+        public Customer(string fullname, Address address)
         {
             _id = _nextid++;
             FullName = fullname;

@@ -16,6 +16,17 @@ namespace ObjectOrientedPractics.View.Tabs
     {
         private List<Item> _items = new();
         private Item _item;
+
+        public List<Item> Items
+        {
+            set
+            {
+                _items = value;
+                UpdateItemsListBox();
+
+            }
+            get { return _items; }
+        }
         public ItemsTab()
         {
             InitializeComponent();
@@ -88,7 +99,7 @@ namespace ObjectOrientedPractics.View.Tabs
             try
             {
                 CostTextBox.BackColor = Color.White;
-                ValueValidator.AssertOnPositiveValue(Convert.ToDouble(CostTextBox.Text), 100000, nameof(Item.Cost));
+                ValueValidator.AssertOnPositiveValue(Convert.ToDouble(CostTextBox.Text),0, 100000, nameof(Item.Cost));
 
                 if (ItemsListBox.SelectedIndex >= 0)
                 {
@@ -188,6 +199,15 @@ namespace ObjectOrientedPractics.View.Tabs
             ItemsListBox.Items[index] = $"{_items[index].Name} стоит - {_items[index].Cost}";
         }
 
+        private void UpdateItemsListBox()
+        {
+            ItemsListBox.Items.Clear();
+            foreach (var item in _items)
+            {
+                ItemsListBox.Items.Add($"{item.Name} стоит - {item.Cost}");
+            }
+        }
+
         private void panel2_Click(object sender, EventArgs e)
         {
             ClearingFields();
@@ -207,6 +227,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 IdTextBox.Text = "";
                 CostTextBox.BackColor = Color.White;
                 NameTextBox.BackColor = Color.White;
+                DescriptionTextBox .BackColor = Color.White;
                 CategoryComboBox.Items.Clear();
 
                 CategoryComboBox.Items.AddRange(Enum.GetValues(typeof(Category)).Cast<object>().ToArray());

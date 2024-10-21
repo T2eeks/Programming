@@ -20,7 +20,7 @@ namespace ObjectOrientedPractics.Services
         /// <exception cref="ArgumentException">Когда значение больше максимального</exception>
         public static void AssertStringOnLength(string value, int maxLength, string propertyName)
         {
-            if (value.Length > maxLength)
+            if (value.Length <= 0 || value.Length >= maxLength)
             {
                 throw new ArgumentException($"{nameof(propertyName)} должен быть не больше {maxLength} символов.");
             }
@@ -33,10 +33,28 @@ namespace ObjectOrientedPractics.Services
         /// <param name="maxLength">Максимальное значение </param>
         /// <param name="propertyName">Название значения</param>
         /// <exception cref="ArgumentException">Когда значение больше максимального</exception>
-        public static void AssertOnPositiveValue(double value, double maxValue, string propertyName)
+        public static void AssertOnPositiveValue(double value,double minValue, double maxValue, string propertyName)
         {
-            if (value <= 0 || value > maxValue)
-                throw new ArgumentException($"{nameof(propertyName)} должен быть не меньше 0 и не больше {maxValue} символов.");
+            if (value < minValue || value > maxValue)
+                throw new ArgumentException($"{propertyName} должен быть не меньше {minValue} и не больше {maxValue} символов.");
         }
+
+
+        /// <summary>
+        ///  Проверяет, что значение находится в заданом диапозоне
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="maxValue"></param>
+        /// <param name="propertyName"></param>
+        /// <exception cref="ArgumentException"></exception>
+        public static void AssertOnPositiveValue(int value, int minValue, int maxValue, string propertyName)
+        {
+            if (value < minValue || value > maxValue)
+            {
+                throw new ArgumentException($"{propertyName} должен быть не меньше {minValue} и не больше {maxValue}. Текущее значение: {value}");
+            }
+        }
+
+
     }
 }

@@ -23,6 +23,13 @@ namespace ObjectOrientedPractics.View.Controls
             {
 
                 _address = value;
+
+                PostIndexTextBox.Text = _address.Index == 0 ? "" : _address.Index.ToString();
+                CountryTextBox.Text = _address.Country;
+                CityTextBox.Text = _address.City;
+                StreetTextBox.Text = _address.Street;
+                BuildingTextBox.Text = _address.Building;
+                ApartmentTextBox.Text = _address.Apartment;
             }
             get { return _address; }
         }
@@ -34,15 +41,18 @@ namespace ObjectOrientedPractics.View.Controls
 
         private void PostIndexTextBox_TextChanged(object sender, EventArgs e)
         {
+
             try
             {
                 PostIndexTextBox.BackColor = Color.White;
-                ValueValidator.AssertOnPositiveValue(Convert.ToInt32(PostIndexTextBox.Text), 6, nameof(Address.Index));
+                ValueValidator.AssertOnPositiveValue(Convert.ToInt32(PostIndexTextBox.Text), 100000, 1000000, nameof(Address.Index));
+
                 _address.Index = Convert.ToInt32(PostIndexTextBox.Text);
             }
             catch
             {
                 PostIndexTextBox.BackColor = Color.LightPink;
+
             }
 
         }
@@ -113,7 +123,7 @@ namespace ObjectOrientedPractics.View.Controls
             try
             {
                 ApartmentTextBox.BackColor = Color.White;
-                ValueValidator.AssertStringOnLength(ApartmentTextBox.Text, 10, nameof(Address.Apartment));
+                ValueValidator.AssertStringOnLength(ApartmentTextBox.Text, 100, nameof(Address.Apartment));
                 _address.Apartment = ApartmentTextBox.Text;
             }
 
@@ -125,6 +135,8 @@ namespace ObjectOrientedPractics.View.Controls
 
         public void Clear()
         {
+            _address = new Address();
+
             PostIndexTextBox.Text = "";
             CountryTextBox.Text = "";
             CityTextBox.Text = "";
@@ -133,16 +145,13 @@ namespace ObjectOrientedPractics.View.Controls
             ApartmentTextBox.Text = "";
 
             PostIndexTextBox.BackColor = Color.White;
+            CountryTextBox.BackColor = Color.White;
+            CityTextBox.BackColor = Color.White;
+            StreetTextBox.BackColor = Color.White;
+            BuildingTextBox.BackColor = Color.White;
+            ApartmentTextBox.BackColor = Color.White;
         }
 
-        private void UpdateAddressFields()
-        {
-            PostIndexTextBox.Text = _address.Index.ToString();
-            CountryTextBox.Text = _address.Country;
-            CityTextBox.Text = _address.City;
-            StreetTextBox.Text = _address.Street;
-            BuildingTextBox.Text = _address.Building;
-            ApartmentTextBox.Text = _address.Apartment;
-        }
+
     }
 }

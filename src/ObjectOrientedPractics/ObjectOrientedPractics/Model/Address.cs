@@ -43,13 +43,13 @@ namespace ObjectOrientedPractics.Model
         private string _apartment;
 
         /// <summary>
-        /// Возвращает и задает индекс адреса. Значение должно быть положительным и содержать не более 6 символов.
+        /// Возвращает и задает индекс адреса. Значение должно быть положительным и содержать не более 1000000 символов.
         /// </summary>
         public int Index
         {
             set
             {
-                ValueValidator.AssertOnPositiveValue(value, 6, nameof(Index));
+                ValueValidator.AssertOnPositiveValue(value, 100000, 999999, nameof(Index));
                 _index = value;
             }
             get { return _index; }
@@ -114,6 +114,7 @@ namespace ObjectOrientedPractics.Model
         {
             set
             {
+               
                 ValueValidator.AssertStringOnLength(value, 10, nameof(Apartment));
                 _apartment = value;
             }
@@ -137,6 +138,16 @@ namespace ObjectOrientedPractics.Model
             Street = street;
             Building = building;
             Apartment = apartment;
+        }
+
+        public Address(Address adress)
+        {
+            Index = adress.Index;
+            Country = adress.Country;
+            City = adress.City;
+            Street = adress.Street;
+            Building = adress.Building;
+            Apartment = adress.Apartment;
         }
 
         /// <summary>

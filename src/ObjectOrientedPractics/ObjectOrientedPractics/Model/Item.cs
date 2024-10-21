@@ -12,7 +12,7 @@ namespace ObjectOrientedPractics
     /// <summary>
     /// Представляет товар в системе
     /// </summary>
-    internal class Item
+    public class Item
     {
         /// <summary>
         /// Хранит следующее доступное значение идентификатора для новых товаров
@@ -80,7 +80,7 @@ namespace ObjectOrientedPractics
         {
             set
             {
-                ValueValidator.AssertOnPositiveValue(value, 100000, nameof(Cost));
+                ValueValidator.AssertOnPositiveValue(value,0, 100000, nameof(Cost));
                 _cost = value;
             }
             get { return _cost; }
