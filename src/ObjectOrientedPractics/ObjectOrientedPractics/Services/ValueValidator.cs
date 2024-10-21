@@ -11,6 +11,7 @@ namespace ObjectOrientedPractics.Services
     /// </summary>
     internal class ValueValidator
     {
+
         /// <summary>
         /// Проверяет, что значение болжительное и не более максимального значения
         /// </summary>
