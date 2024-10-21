@@ -34,6 +34,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             if (CustomersListBox.SelectedIndex >= 0 && CustomersListBox.SelectedIndex < _customers.Count)
             {
                 _customer = _customers[CustomersListBox.SelectedIndex];
