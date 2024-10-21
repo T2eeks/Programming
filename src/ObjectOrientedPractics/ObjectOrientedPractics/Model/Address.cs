@@ -140,15 +140,7 @@ namespace ObjectOrientedPractics.Model
             Apartment = apartment;
         }
 
-        public Address(Address adress)
-        {
-            Index = adress.Index;
-            Country = adress.Country;
-            City = adress.City;
-            Street = adress.Street;
-            Building = adress.Building;
-            Apartment = adress.Apartment;
-        }
+       
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Address"/> без параметров.

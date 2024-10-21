@@ -71,7 +71,7 @@ namespace ObjectOrientedPractics.View.Tabs
             try
             {
 
-                Customer addCustomer = new Customer(FullNameTextBox.Text, new Address(AddressControl.Address));
+                Customer addCustomer = new Customer(FullNameTextBox.Text, AddressControl.Address);
                 if (FullNameTextBox.Text != "")
                 {
                     _customers.Add(addCustomer);

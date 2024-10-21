@@ -40,13 +40,15 @@
             ManufacturerTextBox = new TextBox();
             CategoryComboBox = new ComboBox();
             QuantityTextBox = new TextBox();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // ProductListBox
             // 
             ProductListBox.FormattingEnabled = true;
             ProductListBox.ItemHeight = 20;
-            ProductListBox.Location = new Point(12, 23);
+            ProductListBox.Location = new Point(3, 3);
             ProductListBox.Name = "ProductListBox";
             ProductListBox.Size = new Size(357, 384);
             ProductListBox.TabIndex = 0;
@@ -54,7 +56,7 @@
             // 
             // CreateButton
             // 
-            CreateButton.Location = new Point(12, 413);
+            CreateButton.Location = new Point(3, 469);
             CreateButton.Name = "CreateButton";
             CreateButton.Size = new Size(73, 29);
             CreateButton.TabIndex = 1;
@@ -64,7 +66,7 @@
             // 
             // ChangeButton
             // 
-            ChangeButton.Location = new Point(91, 413);
+            ChangeButton.Location = new Point(3, 432);
             ChangeButton.Name = "ChangeButton";
             ChangeButton.Size = new Size(73, 29);
             ChangeButton.TabIndex = 2;
@@ -74,7 +76,7 @@
             // 
             // DeleteButton
             // 
-            DeleteButton.Location = new Point(170, 413);
+            DeleteButton.Location = new Point(3, 508);
             DeleteButton.Name = "DeleteButton";
             DeleteButton.Size = new Size(73, 29);
             DeleteButton.TabIndex = 3;
@@ -152,11 +154,33 @@
             QuantityTextBox.TabIndex = 11;
             QuantityTextBox.TextChanged += QuantityTextBox_TextChanged;
             // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.Controls.Add(ChangeButton, 0, 1);
+            tableLayoutPanel1.Controls.Add(CreateButton, 0, 2);
+            tableLayoutPanel1.Controls.Add(DeleteButton, 0, 3);
+            tableLayoutPanel1.Controls.Add(ProductListBox, 0, 0);
+            tableLayoutPanel1.Dock = DockStyle.Left;
+            tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 4;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 37F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 39F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 51F));
+            tableLayoutPanel1.Size = new Size(369, 556);
+            tableLayoutPanel1.TabIndex = 12;
+            tableLayoutPanel1.Paint += tableLayoutPanel1_Paint;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(803, 556);
+            Controls.Add(tableLayoutPanel1);
             Controls.Add(QuantityTextBox);
             Controls.Add(CategoryComboBox);
             Controls.Add(ManufacturerTextBox);
@@ -165,14 +189,11 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(DeleteButton);
-            Controls.Add(ChangeButton);
-            Controls.Add(CreateButton);
-            Controls.Add(ProductListBox);
             Name = "MainForm";
             Text = "Form1";
             FormClosed += MainForm_FormClosed;
             Load += MainForm_Load;
+            tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -191,5 +212,6 @@
         private TextBox ManufacturerTextBox;
         private ComboBox CategoryComboBox;
         private TextBox QuantityTextBox;
+        private TableLayoutPanel tableLayoutPanel1;
     }
 }

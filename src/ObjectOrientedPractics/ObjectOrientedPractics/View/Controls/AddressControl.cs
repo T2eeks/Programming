@@ -93,7 +93,7 @@ namespace ObjectOrientedPractics.View.Controls
             try
             {
                 BuildingTextBox.BackColor = Color.White;
-                ValueValidator.AssertStringOnLength(CountryTextBox.Text, 10, nameof(Address.Building));
+                ValueValidator.AssertStringOnLength(BuildingTextBox.Text, 10, nameof(Address.Building));
                 _address.Building = BuildingTextBox.Text;
             }
 

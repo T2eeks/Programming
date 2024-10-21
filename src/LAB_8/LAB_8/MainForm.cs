@@ -183,8 +183,13 @@ namespace LAB_8
             }
             else
             {
-                _products = new List<Product>(); 
+                _products = new List<Product>();
             }
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

@@ -51,20 +51,22 @@
             // 
             // ItemsListBox
             // 
+            ItemsListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ItemsListBox.FormattingEnabled = true;
             ItemsListBox.ItemHeight = 20;
             ItemsListBox.Location = new Point(3, 26);
             ItemsListBox.Name = "ItemsListBox";
-            ItemsListBox.Size = new Size(350, 424);
+            ItemsListBox.Size = new Size(401, 404);
             ItemsListBox.TabIndex = 0;
             ItemsListBox.Click += ItemsListBox_Click;
             ItemsListBox.SelectedIndexChanged += ItemsListBox_SelectedIndexChanged;
             // 
             // AddButton
             // 
-            AddButton.Location = new Point(3, 456);
+            AddButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            AddButton.Location = new Point(13, 476);
             AddButton.Name = "AddButton";
-            AddButton.Size = new Size(106, 54);
+            AddButton.Size = new Size(108, 63);
             AddButton.TabIndex = 1;
             AddButton.Text = "Add";
             AddButton.UseVisualStyleBackColor = true;
@@ -72,9 +74,10 @@
             // 
             // RemoveButton
             // 
-            RemoveButton.Location = new Point(115, 456);
+            RemoveButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            RemoveButton.Location = new Point(184, 476);
             RemoveButton.Name = "RemoveButton";
-            RemoveButton.Size = new Size(106, 54);
+            RemoveButton.Size = new Size(111, 63);
             RemoveButton.TabIndex = 2;
             RemoveButton.Text = "Remove";
             RemoveButton.UseVisualStyleBackColor = true;
@@ -173,19 +176,22 @@
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.BackColor = SystemColors.ControlLightLight;
             panel1.Controls.Add(ItemsListBox);
             panel1.Controls.Add(AddButton);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(RemoveButton);
-            panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(367, 568);
+            panel1.Size = new Size(418, 594);
             panel1.TabIndex = 13;
             panel1.Click += panel2_Click;
             // 
             // panel2
             // 
+            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            panel2.BackColor = SystemColors.ControlLightLight;
             panel2.Controls.Add(label6);
             panel2.Controls.Add(CategoryComboBox);
             panel2.Controls.Add(IdTextBox);
@@ -197,12 +203,12 @@
             panel2.Controls.Add(label1);
             panel2.Controls.Add(NameTextBox);
             panel2.Controls.Add(label3);
-            panel2.Dock = DockStyle.Right;
-            panel2.Location = new Point(379, 0);
+            panel2.Location = new Point(424, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(464, 568);
+            panel2.Size = new Size(451, 594);
             panel2.TabIndex = 14;
             panel2.Click += panel2_Click;
+            panel2.Paint += panel2_Paint;
             // 
             // label6
             // 
@@ -231,7 +237,7 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "ItemsTab";
-            Size = new Size(843, 568);
+            Size = new Size(894, 597);
             Click += ItemsTab_Click;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
