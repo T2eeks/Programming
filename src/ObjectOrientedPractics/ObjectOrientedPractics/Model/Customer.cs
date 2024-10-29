@@ -17,7 +17,7 @@ namespace ObjectOrientedPractics
         /// <summary>
         /// Хранит следующее доступное значение идентификатора для новых клиентов
         /// </summary>
-        private static int _nextid = 1;
+        private static int _nextid  = 1;
 
         /// <summary>
         /// Хранит уникальный идентификатор клиента
