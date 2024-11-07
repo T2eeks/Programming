@@ -35,6 +35,11 @@ namespace ObjectOrientedPractics
         private Address _address;
 
         /// <summary>
+        /// Корзина клиента
+        /// </summary>
+        private Cart _cart;
+
+        /// <summary>
         /// Возвращает уникальный идентификатор клиента
         /// </summary>
         public int Id
@@ -68,6 +73,14 @@ namespace ObjectOrientedPractics
         }
 
         /// <summary>
+        /// Возвращает корзину клиента
+        /// </summary>
+        public Cart Cart
+        {
+            get { return _cart; }
+        }
+
+        /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Customer"/> с указанным полным именем и адресом.
         /// </summary>
         /// <param name="fullname">Полное имя клиента </param>
@@ -77,6 +90,7 @@ namespace ObjectOrientedPractics
             _id = _nextid++;
             FullName = fullname;
             Address = address;
+            _cart = new Cart();
         }
     }
 }

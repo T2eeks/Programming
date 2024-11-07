@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model
 {
-    internal class OrderStatus
+    /// <summary>
+    /// Перечисление статусов заказа
+    /// </summary>
+    enum OrderStatus
     {
+        New,
+        Processing,
+        Assembly,
+        Sent,
+        Delivered,
+        Returned,
+        Abandoned,
     }
 }
