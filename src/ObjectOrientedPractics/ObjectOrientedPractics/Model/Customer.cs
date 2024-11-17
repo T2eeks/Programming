@@ -39,6 +39,8 @@ namespace ObjectOrientedPractics
         /// </summary>
         private Cart _cart;
 
+        private List<Order> _orders;
+
         /// <summary>
         /// Возвращает уникальный идентификатор клиента
         /// </summary>
@@ -81,6 +83,16 @@ namespace ObjectOrientedPractics
         }
 
         /// <summary>
+        /// Заказы клиента
+        /// </summary>
+        public List<Order> Orders
+        {
+            set { _orders = value; }
+
+            get { return _orders; }
+        }
+
+        /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Customer"/> с указанным полным именем и адресом.
         /// </summary>
         /// <param name="fullname">Полное имя клиента </param>
@@ -91,6 +103,7 @@ namespace ObjectOrientedPractics
             FullName = fullname;
             Address = address;
             _cart = new Cart();
+            _orders = new List<Order>();
         }
     }
 }

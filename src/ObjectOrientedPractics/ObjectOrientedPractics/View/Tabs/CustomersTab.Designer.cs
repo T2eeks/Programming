@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Model.Address address1 = new Model.Address();
+            Model.Address address4 = new Model.Address();
             label5 = new Label();
             label4 = new Label();
             label1 = new Label();
@@ -105,19 +105,19 @@
             CustomersListBox.ItemHeight = 20;
             CustomersListBox.Location = new Point(10, 35);
             CustomersListBox.Name = "CustomersListBox";
-            CustomersListBox.Size = new Size(274, 404);
+            CustomersListBox.Size = new Size(278, 404);
             CustomersListBox.TabIndex = 13;
             CustomersListBox.SelectedIndexChanged += CustomersListBox_SelectedIndexChanged;
             // 
             // AddressControl
             // 
-            //address1.Apartment = null;
-            //address1.Building = null;
-            //address1.City = null;
-            //address1.Country = null;
-            //address1.Index = null;
-            //address1.Street = null;
-            AddressControl.Address = address1;
+            //address4.Apartment = null;
+            //address4.Building = null;
+            //address4.City = null;
+            //address4.Country = null;
+            //address4.Index = 0;
+            //address4.Street = null;
+            //AddressControl.Address = address4;
             AddressControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             AddressControl.Location = new Point(4, 117);
             AddressControl.Name = "AddressControl";
@@ -127,9 +127,9 @@
             // AddButton
             // 
             AddButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            AddButton.Location = new Point(3, 463);
+            AddButton.Location = new Point(13, 476);
             AddButton.Name = "AddButton";
-            AddButton.Size = new Size(97, 73);
+            AddButton.Size = new Size(108, 63);
             AddButton.TabIndex = 14;
             AddButton.Text = "Add";
             AddButton.UseVisualStyleBackColor = true;
@@ -138,9 +138,9 @@
             // RemoveButton
             // 
             RemoveButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            RemoveButton.Location = new Point(113, 463);
+            RemoveButton.Location = new Point(177, 476);
             RemoveButton.Name = "RemoveButton";
-            RemoveButton.Size = new Size(111, 73);
+            RemoveButton.Size = new Size(108, 63);
             RemoveButton.TabIndex = 15;
             RemoveButton.Text = "Remove";
             RemoveButton.UseVisualStyleBackColor = true;
@@ -156,7 +156,7 @@
             panel1.Controls.Add(label4);
             panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(293, 564);
+            panel1.Size = new Size(297, 564);
             panel1.TabIndex = 29;
             // 
             // panel2

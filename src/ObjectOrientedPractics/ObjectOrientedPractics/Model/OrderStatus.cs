@@ -9,7 +9,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Перечисление статусов заказа
     /// </summary>
-    enum OrderStatus
+    public enum OrderStatus
     {
         New,
         Processing,
