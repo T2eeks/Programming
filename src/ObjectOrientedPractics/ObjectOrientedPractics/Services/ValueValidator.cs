@@ -21,7 +21,7 @@ namespace ObjectOrientedPractics.Services
         /// <exception cref="ArgumentException">Когда значение больше максимального</exception>
         public static void AssertStringOnLength(string value, int maxLength, string propertyName)
         {
-            if (value.Length <= 0 || value.Length >= maxLength)
+            if (value.Length >= maxLength)
             {
                 throw new ArgumentException($"{nameof(propertyName)} должен быть не больше {maxLength} символов.");
             }

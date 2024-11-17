@@ -43,7 +43,7 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         public int Id
         {
-            get { return _nextId; }
+            get { return _id; }
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace ObjectOrientedPractics.Model
             _creationDate = DateTime.Now;
             _deliveryAddress = deliveryAddress;
             Status = OrderStatus.New;
-            _items = new List<Item>();
+            Items = items ?? new List<Item>();
         }
 
     }

@@ -85,12 +85,7 @@ namespace ObjectOrientedPractics
         /// <summary>
         /// Заказы клиента
         /// </summary>
-        public List<Order> Orders
-        {
-            set { _orders = value; }
-
-            get { return _orders; }
-        }
+        public List<Order> Orders { get; private set; }
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Customer"/> с указанным полным именем и адресом.
@@ -103,7 +98,7 @@ namespace ObjectOrientedPractics
             FullName = fullname;
             Address = address;
             _cart = new Cart();
-            _orders = new List<Order>();
+            Orders = new List<Order>();
         }
     }
 }
