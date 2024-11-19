@@ -157,9 +157,9 @@
             amountValueLabel.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             amountValueLabel.Location = new Point(425, 266);
             amountValueLabel.Name = "amountValueLabel";
-            amountValueLabel.Size = new Size(35, 23);
+            amountValueLabel.Size = new Size(20, 23);
             amountValueLabel.TabIndex = 5;
-            amountValueLabel.Text = "0,0";
+            amountValueLabel.Text = "0";
             // 
             // label4
             // 

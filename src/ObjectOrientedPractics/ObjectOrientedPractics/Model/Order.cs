@@ -109,7 +109,7 @@ namespace ObjectOrientedPractics.Model
             _creationDate = DateTime.Now;
             _deliveryAddress = deliveryAddress;
             Status = OrderStatus.New;
-            Items = items ?? new List<Item>();
+            Items = items;
         }
 
     }

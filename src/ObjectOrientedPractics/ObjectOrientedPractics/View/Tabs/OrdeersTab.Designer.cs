@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Model.Address address2 = new Model.Address();
+            Model.Address address1 = new Model.Address();
             panel1 = new Panel();
             OrdersDataGridView = new DataGridView();
             Id = new DataGridViewTextBoxColumn();
@@ -225,9 +225,9 @@
             amountValueLabel.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             amountValueLabel.Location = new Point(419, 573);
             amountValueLabel.Name = "amountValueLabel";
-            amountValueLabel.Size = new Size(35, 23);
+            amountValueLabel.Size = new Size(20, 23);
             amountValueLabel.TabIndex = 11;
-            amountValueLabel.Text = "0,0";
+            amountValueLabel.Text = "0";
             // 
             // label6
             // 
@@ -260,8 +260,8 @@
             label5.Text = "Order Items";
             // 
             // addressControl1
-            //
-            addressControl1.Address = address2;
+            // 
+      
             addressControl1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             addressControl1.Location = new Point(3, 160);
             addressControl1.Name = "addressControl1";
