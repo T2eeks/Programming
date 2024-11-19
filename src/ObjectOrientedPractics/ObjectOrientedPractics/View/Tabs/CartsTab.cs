@@ -183,22 +183,21 @@ namespace ObjectOrientedPractics.View.Tabs
 
             var items = new List<Item>(_currentCustomer.Cart.Items);
 
-            if (_currentCustomer.IsPriority = false)
+            if (_currentCustomer.IsPriority)
             {
-                var order = new Order(_currentCustomer.Address, items);
 
-                _currentCustomer.Orders.Add(order);
-                _currentCustomer.Cart.Items.Clear();
-                UpdateCartListBox();
+                var priorityOrder = new PriorityOrder(_currentCustomer.Address, items, DateTime.Now);
+                _currentCustomer.Orders.Add(priorityOrder);
             }
             else
             {
-                var newPriorityOrder = new PriorityOrder(
-                    _currentCustomer.Address, items, DateTime.Now);
-                _currentCustomer.Orders.Add(newPriorityOrder);
-                _currentCustomer.Cart.Items.Clear();
-                UpdateCartListBox();
+                // Создание обычного заказа
+                var order = new Order(_currentCustomer.Address, items);
+                _currentCustomer.Orders.Add(order);
             }
+
+            _currentCustomer.Cart.Items.Clear();
+            UpdateCartListBox();
 
         }
 

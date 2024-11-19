@@ -18,6 +18,10 @@ namespace ObjectOrientedPractics.View.Tabs
         private List<Customer> _customers;
         private List<Order> Orders { get; } = new List<Order>();
 
+        private Order _selectedOrder;
+
+        private PriorityOrder _selectedPriorityOrder;
+
         public List<Customer> Customers
         {
             get { return _customers; }
@@ -34,6 +38,7 @@ namespace ObjectOrientedPractics.View.Tabs
             IdTexBox.ReadOnly = true;
             CreatedTextBox.ReadOnly = true;
             StatusComboBox.FormattingEnabled = true;
+            PriorityPanel.Visible = false;
         }
 
         public void RefreshData()
@@ -83,28 +88,30 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void OrdersDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            if (OrdersDataGridView.SelectedRows.Count == 0) return;
-
-
-            var selectedRow = OrdersDataGridView.SelectedRows[0];
-            var selectedOrder = selectedRow.Tag as Order;
-
-            if (selectedOrder == null) return;
-
-
-            addressControl1.Address = selectedOrder.DeliveryAddress;
-            IdTexBox.Text = selectedOrder.Id.ToString();
-            CreatedTextBox.Text = selectedOrder.CreationDate.ToString("yyyy-MM-dd HH:mm");
-            StatusComboBox.SelectedItem = selectedOrder.Status;
-
-
-            OrderItemsListBox.Items.Clear();
-            foreach (var item in selectedOrder.Items)
+            if (OrdersDataGridView.SelectedRows.Count == 0)
             {
-                OrderItemsListBox.Items.Add($"{item.Name} - {item.Cost:C}");
+                _selectedOrder = null;
+                _selectedPriorityOrder = null;
+                PriorityPanel.Visible = false;
+                return;
             }
 
-            amountValueLabel.Text = selectedOrder.TotalAmount.ToString("F2");
+            _selectedOrder = OrdersDataGridView.SelectedRows[0].Tag as Order;
+
+            if (_selectedOrder is PriorityOrder priorityOrder)
+            {
+                _selectedPriorityOrder = priorityOrder;
+                DeliveryTimeComboBox.SelectedIndex = (int)priorityOrder.Time - 1;
+                PriorityPanel.Visible = true; 
+            }
+            else
+            {
+                _selectedPriorityOrder = null;
+                PriorityPanel.Visible = false; 
+            }
+
+            UpdateOrderDetails();
+
         }
 
         private void StatusComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -128,6 +135,45 @@ namespace ObjectOrientedPractics.View.Tabs
         private void IdTexBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+        private void UpdateOrderDetails()
+        {
+            if (_selectedOrder == null)
+            {
+                return;
+            }
+
+            IdTexBox.Text = _selectedOrder.Id.ToString();
+            CreatedTextBox.Text = _selectedOrder.CreationDate.ToString("yyyy-MM-dd HH:mm");
+            StatusComboBox.SelectedItem = _selectedOrder.Status;
+
+            addressControl1.Address = _selectedOrder.DeliveryAddress;
+
+            OrderItemsListBox.Items.Clear();
+            foreach (var item in _selectedOrder.Items)
+            {
+                OrderItemsListBox.Items.Add($"{item.Name} - {item.Cost:C}");
+            }
+
+            amountValueLabel.Text = _selectedOrder.TotalAmount.ToString("F2");
+
+            if (_selectedPriorityOrder != null)
+            {
+                DeliveryTimeComboBox.SelectedIndex = (int)_selectedPriorityOrder.Time - 1;
+                PriorityPanel.Visible = true;
+            }
+            else
+            {
+                PriorityPanel.Visible = false;
+            }
+        }
+
+        private void DeliveryTimeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_selectedPriorityOrder != null)
+            {
+                _selectedPriorityOrder.Time = (OrderTime)(DeliveryTimeComboBox.SelectedIndex + 1);
+            }
         }
     }
 }
