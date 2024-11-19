@@ -39,7 +39,15 @@ namespace ObjectOrientedPractics
         /// </summary>
         private Cart _cart;
 
+        /// <summary>
+        /// Список покупателей
+        /// </summary>
         private List<Order> _orders;
+
+        /// <summary>
+        /// Приоритет покупателя
+        /// </summary>
+        private bool _isPriority = false;
 
         /// <summary>
         /// Возвращает уникальный идентификатор клиента
@@ -86,6 +94,21 @@ namespace ObjectOrientedPractics
         /// Заказы клиента
         /// </summary>
         public List<Order> Orders { get; private set; }
+
+        /// <summary>
+        /// Возрващает или задает приоритет клиента
+        /// </summary>
+        public bool IsPriority
+        {
+            get
+            {
+                return _isPriority;
+            }
+            set
+            {
+                _isPriority = value;
+            }
+        }
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Customer"/> с указанным полным именем и адресом.

@@ -18,7 +18,7 @@ namespace ObjectOrientedPractics.View.Tabs
         private Customer _customer;
 
         public List<Customer> Customers
-        { 
+        {
             set
             {
                 _customers = value;
@@ -32,6 +32,18 @@ namespace ObjectOrientedPractics.View.Tabs
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Очищает поля ввода данных о клиенте
+        /// </summary>
+        private void ClearingFields()
+        {
+                IdTextBox.Text = "";
+                FullNameTextBox.Text = "";
+
+                AddressControl.Clear();
+
+                FullNameTextBox.BackColor = Color.White;
+        }
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -39,12 +51,10 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 _customer = _customers[CustomersListBox.SelectedIndex];
                 FullNameTextBox.Text = _customer.FullName;
-
                 AddressControl.Address = _customer.Address;
-                
                 IdTextBox.Text = Convert.ToString(_customer.Id);
-                
 
+                IsPriorityCheckBox.Checked = _customer.IsPriority;
             }
         }
 
@@ -70,18 +80,23 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             try
             {
-
-                Customer addCustomer = new Customer(FullNameTextBox.Text, AddressControl.Address);
                 if (FullNameTextBox.Text != "")
                 {
+                    Customer addCustomer = new Customer(FullNameTextBox.Text, AddressControl.Address);
+                    if (IsPriorityCheckBox.Checked)
+                    {
+                        addCustomer.IsPriority = true;
+                    }
+
                     _customers.Add(addCustomer);
-                    CustomersListBox.Items.Add( "Гражданин " + addCustomer.FullName);
+                    CustomersListBox.Items.Add("Гражданин " + addCustomer.FullName);
                     FullNameTextBox.Text = "";
                     FullNameTextBox.BackColor = Color.White;
 
                     AddressControl.Clear();
+                    IsPriorityCheckBox.Checked = false;
 
-                    
+
                 }
             }
             catch (Exception ex)
@@ -94,18 +109,23 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             try
             {
-                _customers.RemoveAt(CustomersListBox.SelectedIndex);
-                CustomersListBox.Items.RemoveAt(CustomersListBox.SelectedIndex);
 
-                FullNameTextBox.Text = "";
-                FullNameTextBox.BackColor = Color.White;
+                if (CustomersListBox.SelectedIndex < 0)
+                {
+                    MessageBox.Show("Выберите элемент для удаления.");
+                    return;
+                }
 
-                AddressControl.Clear();
+                int selectedIndex = CustomersListBox.SelectedIndex;
+                _customers.RemoveAt(selectedIndex);
 
+                CustomersListBox.Items.RemoveAt(selectedIndex);
+                
+                ClearingFields();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Произошла ошибка при добавлении - " + ex.Message);
+                MessageBox.Show("Произошла ошибка при удалении - " + ex.Message);
             }
 
         }
@@ -133,25 +153,33 @@ namespace ObjectOrientedPractics.View.Tabs
             }
         }
 
-        /// <summary>
-        /// Очищает поля ввода данных о клиенте
-        /// </summary>
-        private void ClearingFields()
-        {
-            if (CustomersListBox.SelectedIndex >= 0 && CustomersListBox.SelectedIndex < _customers.Count)
-            {
-                CustomersListBox.SetSelected(0, false);
-                IdTextBox.Text = "";
-                FullNameTextBox.Text = "";
-
-                AddressControl.Clear();
-
-                FullNameTextBox.BackColor= Color.White;
-            }
-        }
         private void IdTextBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel2_Click(object sender, EventArgs e)
+        {
+            if (CustomersListBox.SelectedIndex >= 0)
+            {
+                CustomersListBox.SetSelected(0, false);
+                ClearingFields();
+                AddressControl.Clear();
+            }
+
+        }
+
+        private void IsPriorityCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if(CustomersListBox.SelectedIndex >= 0)
+            {
+                _customers[CustomersListBox.SelectedIndex].IsPriority = true;
+            }
         }
     }
 }

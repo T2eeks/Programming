@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Model.Address address4 = new Model.Address();
+            Model.Address address1 = new Model.Address();
             label5 = new Label();
             label4 = new Label();
             label1 = new Label();
@@ -41,6 +41,7 @@
             RemoveButton = new Button();
             panel1 = new Panel();
             panel2 = new Panel();
+            IsPriorityCheckBox = new CheckBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -111,17 +112,10 @@
             // 
             // AddressControl
             // 
-            //address4.Apartment = null;
-            //address4.Building = null;
-            //address4.City = null;
-            //address4.Country = null;
-            //address4.Index = 0;
-            //address4.Street = null;
-            //AddressControl.Address = address4;
             AddressControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            AddressControl.Location = new Point(4, 117);
+            AddressControl.Location = new Point(3, 148);
             AddressControl.Name = "AddressControl";
-            AddressControl.Size = new Size(515, 396);
+            AddressControl.Size = new Size(515, 250);
             AddressControl.TabIndex = 27;
             // 
             // AddButton
@@ -163,6 +157,7 @@
             // 
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             panel2.BackColor = SystemColors.ButtonHighlight;
+            panel2.Controls.Add(IsPriorityCheckBox);
             panel2.Controls.Add(AddressControl);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(IdTextBox);
@@ -173,6 +168,19 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(531, 564);
             panel2.TabIndex = 30;
+            panel2.Click += panel2_Click;
+            panel2.Paint += panel2_Paint;
+            // 
+            // IsPriorityCheckBox
+            // 
+            IsPriorityCheckBox.AutoSize = true;
+            IsPriorityCheckBox.Location = new Point(88, 111);
+            IsPriorityCheckBox.Name = "IsPriorityCheckBox";
+            IsPriorityCheckBox.Size = new Size(92, 24);
+            IsPriorityCheckBox.TabIndex = 28;
+            IsPriorityCheckBox.Text = "Is Priority";
+            IsPriorityCheckBox.UseVisualStyleBackColor = true;
+            IsPriorityCheckBox.CheckedChanged += IsPriorityCheckBox_CheckedChanged;
             // 
             // CustomersTab
             // 
@@ -204,5 +212,6 @@
         private Button AddButton;
         private Panel panel1;
         private Panel panel2;
+        private CheckBox IsPriorityCheckBox;
     }
 }

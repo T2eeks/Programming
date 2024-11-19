@@ -125,7 +125,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void ClearOrderButton_Click(object sender, EventArgs e)
         {
-            _priorityOrder = new PriorityOrder(new Address(), new List<Item>(), DateTime.Now, OrderTime.FromNineToElevenAM);
+            _priorityOrder = new PriorityOrder(new Address(), new List<Item>(), DateTime.Now);
             UpdateOrderDetails();
         }
 
