@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model
 {
-    internal class PriorityOrder : Order
+    public class PriorityOrder : Order
     {
 
         /// <summary>
@@ -22,15 +22,16 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Создает экзепляр класса <see cref="PriorityOrder"/>.
         /// </summary>
-        /// <param name="status">Статус заказа.</param>
         /// <param name="address">Адрес доставки.</param>
         /// <param name="items">Список товаров заказа.</param>
         public PriorityOrder(
-            OrderStatus status,
-            Address address,
-            List<Item> items) : base(address, items)
+          Address address,
+          List<Item> items,
+          DateTime date,
+          OrderTime time) : base(address, items)
         {
-
+            Date = date;
+            Time = time;
         }
     }
 }

@@ -11,11 +11,11 @@ namespace ObjectOrientedPractics.Model
     /// </summary>
     public enum OrderTime
     {
-        FromNineToElevenAM,
-        FromElevenToOnePM,
-        FromOneToThreePM,
-        FromThreeToFivePM,
-        FromFiveToSevenPM,
-        FromSevenToNinePM
+        FromNineToElevenAM = 1,
+        FromElevenToOnePM = 2,
+        FromOneToThreePM = 3,
+        FromThreeToFivePM = 4,
+        FromFiveToSevenPM =5,
+        FromSevenToNinePM = 6
     }
 }

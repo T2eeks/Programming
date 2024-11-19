@@ -199,6 +199,7 @@
             IdTexBox.Name = "IdTexBox";
             IdTexBox.Size = new Size(127, 27);
             IdTexBox.TabIndex = 5;
+            IdTexBox.TextChanged += IdTexBox_TextChanged;
             // 
             // StatusComboBox
             // 
@@ -261,7 +262,6 @@
             // 
             // addressControl1
             // 
-      
             addressControl1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             addressControl1.Location = new Point(3, 160);
             addressControl1.Name = "addressControl1";

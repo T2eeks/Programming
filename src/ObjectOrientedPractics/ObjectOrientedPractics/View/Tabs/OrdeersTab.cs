@@ -22,7 +22,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             get { return _customers; }
             set
-            { 
+            {
                 _customers = value;
             }
         }
@@ -33,6 +33,7 @@ namespace ObjectOrientedPractics.View.Tabs
             addressControl1.Enabled = false;
             IdTexBox.ReadOnly = true;
             CreatedTextBox.ReadOnly = true;
+            StatusComboBox.FormattingEnabled = true;
         }
 
         public void RefreshData()
@@ -73,7 +74,7 @@ namespace ObjectOrientedPractics.View.Tabs
                         order.Status.ToString()
                     );
 
-                   
+
                     OrdersDataGridView.Rows[rowIndex].Tag = order;
                 }
             }
@@ -90,14 +91,14 @@ namespace ObjectOrientedPractics.View.Tabs
 
             if (selectedOrder == null) return;
 
-            
+
             addressControl1.Address = selectedOrder.DeliveryAddress;
             IdTexBox.Text = selectedOrder.Id.ToString();
             CreatedTextBox.Text = selectedOrder.CreationDate.ToString("yyyy-MM-dd HH:mm");
             StatusComboBox.SelectedItem = selectedOrder.Status;
 
-            
-            OrderItemsListBox.Items.Clear(); 
+
+            OrderItemsListBox.Items.Clear();
             foreach (var item in selectedOrder.Items)
             {
                 OrderItemsListBox.Items.Add($"{item.Name} - {item.Cost:C}");
@@ -118,10 +119,15 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 selectedOrder.Status = newStatus;
 
-                
+
                 UpdateOrders();
 
             }
+        }
+
+        private void IdTexBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

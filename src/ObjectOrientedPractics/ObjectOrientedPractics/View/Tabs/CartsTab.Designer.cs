@@ -62,7 +62,7 @@
             AddCartButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             AddCartButton.Location = new Point(3, 452);
             AddCartButton.Name = "AddCartButton";
-            AddCartButton.Size = new Size(108, 63);
+            AddCartButton.Size = new Size(106, 36);
             AddCartButton.TabIndex = 2;
             AddCartButton.Text = "Add To Cart";
             AddCartButton.UseVisualStyleBackColor = true;
