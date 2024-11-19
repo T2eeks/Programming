@@ -22,7 +22,7 @@ namespace ObjectOrientedPractics
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
+             
         }
 
         private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
