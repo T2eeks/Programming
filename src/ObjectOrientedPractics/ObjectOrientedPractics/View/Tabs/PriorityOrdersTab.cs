@@ -1,5 +1,8 @@
 ﻿using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Model.Enums;
+using ObjectOrientedPractics.Model.Order;
 using ObjectOrientedPractics.View.Controls;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -125,7 +128,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void ClearOrderButton_Click(object sender, EventArgs e)
         {
-            _priorityOrder = new PriorityOrder(new Address(), new List<Item>(), DateTime.Now);
+            _priorityOrder = new PriorityOrder(new Address(), new List<Item>(), DateTime.Now, 0);
             UpdateOrderDetails();
         }
 

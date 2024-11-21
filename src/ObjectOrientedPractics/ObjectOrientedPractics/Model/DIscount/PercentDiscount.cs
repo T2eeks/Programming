@@ -1,100 +1,109 @@
-﻿using System;
+﻿using ObjectOrientedPractics.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model.DIscount
 {
-    internal class PercentDiscount
+    /// <summary>
+    /// Хранит и вычисляет процентную скидку на конкретную категорию товаров.
+    /// </summary>
+    public class PercentDiscount : IDiscount
     {
         /// <summary>
-        /// Категория товаров, на которую распространяется скидка.
+        /// Скидка в процентах.
         /// </summary>
-        public string Category { get; private set; }
+        private int _discount;
 
         /// <summary>
-        /// Текущий процент скидки.
+        /// Возвращает и задает скидку в процентах.
+        /// Скидка должна быть не менее 1% и не более 10%.
         /// </summary>
-        public int Percentage { get; private set; } = 1;
-
-        /// <summary>
-        /// Общая сумма покупок данной категории товаров.
-        /// </summary>
-        public double TotalSpent { get; private set; }
-
-        /// <summary>
-        /// Возвращает название скидки в виде строки.
-        /// </summary>
-        public string Info
+        public int Discount
         {
-            get { return $"Процентная «{Category}» - {Percentage}%"; }
+            get => _discount;
+            private set
+            {
+                ValueValidator.AssertOnPositiveValue(value, 1, 10, nameof(Discount));
+                _discount = value;
+            }
         }
 
         /// <summary>
-        /// Рассчитывает размер скидки для заданного списка товаров.
+        /// Возвращает категорию товара, на которую действует скидка.
+        /// </summary>
+        public Category Category { get; }
+
+        /// <summary>
+        /// Возвращает сумму, на которую покупатель уже сделал покупки данной категории товаров.
+        /// </summary>
+        public double SpendingPerCategory { get; private set; } = 0;
+
+        /// <summary>
+        /// Информация о скидке.
+        /// </summary>
+        public string Info
+        {
+            get
+            {
+                return $"Процентная \"{Category}\" - {Discount}%";
+            }
+        }
+
+        /// <summary>
+        /// Вычисляет размер скидки, доступный для списка товаров.
         /// </summary>
         /// <param name="items">Список товаров.</param>
         /// <returns>Размер скидки.</returns>
         public double Calculate(List<Item> items)
         {
-            if (items == null || !items.Any())
-            {
-                return 0.0;
-            }
-
-            var categoryItems = items.Where(item => item.Category.ToString() == Category).ToList();
-            if (!categoryItems.Any())
-            {
-                return 0.0;
-            } 
-
-            double categoryTotal = categoryItems.Sum(item => item.Cost);
-            return categoryTotal * (Percentage / 100.0);
+            var amount = ItemsTool.GetAmountOnCategory(items, Category);
+            return amount * Discount / 100;
         }
 
         /// <summary>
-        /// Применяет скидку к списку товаров и возвращает размер скидки.
+        /// Применяет скидку, доступную для списка товаров.
         /// </summary>
         /// <param name="items">Список товаров.</param>
-        /// <returns>Размер примененной скидки.</returns>
+        /// <returns>Размер скидки.</returns>
         public double Apply(List<Item> items)
         {
-            double discount = Calculate(items);
-            return discount;
+            return Calculate(items);
         }
 
         /// <summary>
-        /// Обновляет данные скидки на основе новых покупок.
+        /// Обновляет процент скидки на основе полученного списка товаров.
+        /// Каждые 1000 рублей, на которую покупатель совершает покупки, 
+        /// скидка увеличивается на 1%.
         /// </summary>
         /// <param name="items">Список товаров.</param>
         public void Update(List<Item> items)
         {
-            if (items == null || !items.Any())
-            {
-                return;
-            }
+            var amount = ItemsTool.GetAmountOnCategory(items, Category);
+            SpendingPerCategory += amount;
+            var percentage = (int)(SpendingPerCategory / 1000) + 1;
 
-            var categoryItems = items.Where(item => item.Category.ToString() == Category).ToList();
-            if (!categoryItems.Any())
+            if (percentage > 10)
             {
-                return;
+                Discount = 10;
             }
-
-            TotalSpent += categoryItems.Sum(item => item.Cost);
-            Percentage = Math.Min(1 + (int)(TotalSpent / 1000), 10); // Максимум 10%.
+            else
+            {
+                Discount = percentage;
+            }
         }
 
         /// <summary>
-        /// Создает новый экземпляр класса <see cref="PercentDiscount"/>.
+        /// Создает экзепляр класса <see cref="PercentDiscount"/>.
         /// </summary>
-        /// <param name="category">Категория товаров.</param>
-        public PercentDiscount(string category)
+        /// <param name="category">Категория товара, на которую действует скидка.</param>
+        public PercentDiscount(Category category)
         {
-            if (string.IsNullOrWhiteSpace(category))
-                throw new ArgumentException("Категория не может быть пустой.");
-
             Category = category;
+            Discount = 1;
         }
     }
 }

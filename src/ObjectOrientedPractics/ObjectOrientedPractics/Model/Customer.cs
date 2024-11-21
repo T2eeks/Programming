@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Model.DIscount;
+using ObjectOrientedPractics.Model.Order;
 using ObjectOrientedPractics.Services;
 
 namespace ObjectOrientedPractics
@@ -48,6 +50,11 @@ namespace ObjectOrientedPractics
         /// Приоритет покупателя
         /// </summary>
         private bool _isPriority = false;
+
+        /// <summary>
+        /// Возвращает и задает скидки покупателя.
+        /// </summary>
+        public List<IDiscount> Discounts { get; set; }
 
         /// <summary>
         /// Возвращает уникальный идентификатор клиента
@@ -122,6 +129,8 @@ namespace ObjectOrientedPractics
             Address = address;
             _cart = new Cart();
             Orders = new List<Order>();
+            Discounts = new List<IDiscount>();
+            Discounts.Add(new PointsDiscount());
         }
     }
 }

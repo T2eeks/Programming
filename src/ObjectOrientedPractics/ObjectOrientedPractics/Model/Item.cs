@@ -37,7 +37,7 @@ namespace ObjectOrientedPractics
         /// <summary>
         /// Хранит стоимость товара
         /// </summary>
-        private double _cost;
+        private float _cost;
 
         /// <summary>
         /// Возвращает уникальный идентификатор товара
@@ -76,7 +76,7 @@ namespace ObjectOrientedPractics
         /// <summary>
         /// Возвращает и задает стоимость товара. Должна быть положительной и не превышать 100000
         /// </summary>
-        public double Cost
+        public float Cost
         {
             set
             {
@@ -98,7 +98,7 @@ namespace ObjectOrientedPractics
         /// <param name="info">Описание товара.</param>
         /// <param name="cost">Стоимость товара.</param>
         /// <param name="category">Категория товара. </param>
-        public Item(string name, string info, double cost, Category category)
+        public Item(string name, string info, float cost, Category category)
         {
             _id = _nextId++;
             Name = name;

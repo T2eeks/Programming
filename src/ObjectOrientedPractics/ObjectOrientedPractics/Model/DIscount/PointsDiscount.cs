@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ObjectOrientedPractics.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,103 +7,92 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model.DIscount
 {
-    internal class PointsDiscount
+    /// <summary>
+    /// Хранит и вычисляет данные о накопительных баллах.
+    /// </summary>
+    public class PointsDiscount : IDiscount
     {
         /// <summary>
-        /// Количество накопленных баллов.
+        /// Накопительные баллы.
         /// </summary>
         private int _points;
 
         /// <summary>
-        /// Возвращает текущее количество накопленных баллов.
+        /// Возвращает и задает накопительные баллы.
+        /// Должно быть неотрицательным числом.
         /// </summary>
         public int Points
         {
-            get { return _points; }
+            get => _points;
             private set
             {
-                if (value < 0)
-                {
-                    throw new ArgumentException("Количество баллов не может быть отрицательным.");
-                }
+                ValueValidator.AssertIntOnLowerLimit(value, 0, nameof(Points));
                 _points = value;
             }
         }
 
         /// <summary>
-        /// Возвращает название скидки с указанием количества баллов.
+        /// Информация о скидке.
         /// </summary>
         public string Info
         {
-            get { return $"Накопительная – {Points} баллов"; }
+            get
+            {
+                return $"Накопительная - {Points} баллов";
+            }
         }
 
         /// <summary>
-        /// Рассчитывает размер скидки на основе текущего количества баллов и списка товаров.
+        /// Вычисляет размер скидки, доступный для списка товаров.
+        /// Скидка товаров не может быть больше 30% от общей суммы товаров.
         /// </summary>
         /// <param name="items">Список товаров.</param>
         /// <returns>Размер скидки.</returns>
         public double Calculate(List<Item> items)
         {
-            if (items == null || !items.Any())
+            var amount = ItemsTool.GetAmount(items);
+
+            if (Points / amount > 0.3)
             {
-                return 0.0;
+                return amount * 0.3;
             }
-
-            double totalCost = items.Sum(item => item.Cost);
-            double maxDiscount = totalCost * 0.3;
-
-            if (Points >= maxDiscount)
+            else
             {
-                return maxDiscount;
+                return Points;
             }
-
-            return Points; 
         }
 
         /// <summary>
-        /// Применяет скидку на основе накопленных баллов к списку товаров.
+        /// Применяет накопительные баллы на скидку, доступную для списка товаров.
+        /// Скидка товаров не может быть больше 30% от общей суммы товаров.
         /// </summary>
         /// <param name="items">Список товаров.</param>
-        /// <returns>Размер примененной скидки.</returns>
+        /// <returns>Размер скидки.</returns>
         public double Apply(List<Item> items)
         {
-            if (items == null || !items.Any())
-            {
-                return 0.0;
-            }
-
-            double discount = Calculate(items);
-            Points -= (int)discount; 
-
+            var discount = Calculate(items);
+            Points -= (int)discount;
             return discount;
         }
 
         /// <summary>
-        /// Обновляет количество накопленных баллов на основе стоимости списка товаров.
+        /// Добавляет баллы на основе полученного списка товаров.
+        /// Каждая покупка увеличивает количество накопленных баллов 
+        /// на 10% от общей стоимости товаров.
         /// </summary>
         /// <param name="items">Список товаров.</param>
         public void Update(List<Item> items)
         {
-            if (items == null || !items.Any())
-            {
-                return;
-            }
-
-            double totalCost = items.Sum(item => item.Cost);
-
-           
-            int earnedPoints = (int)Math.Ceiling(totalCost * 0.1);
-            Points += earnedPoints;
+            var amount = ItemsTool.GetAmount(items);
+            Points += (int)Math.Ceiling(amount * 0.1);
         }
 
         /// <summary>
-        /// Создает новый экземпляр класса <see cref="PointsDiscount"/>.
+        /// Создает экзепляр класса <see cref="PointsDiscount"/>.
         /// </summary>
-        /// <param name="initialPoints">Начальное количество баллов.</param>
-        public PointsDiscount(int initialPoints = 0)
+        public PointsDiscount()
         {
-            Points = initialPoints;
+            Points = 0;
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Enums
 {
     /// <summary>
     /// Перечисление статусов заказа
@@ -15,7 +15,7 @@ namespace ObjectOrientedPractics.Model
         FromElevenToOnePM = 2,
         FromOneToThreePM = 3,
         FromThreeToFivePM = 4,
-        FromFiveToSevenPM =5,
+        FromFiveToSevenPM = 5,
         FromSevenToNinePM = 6
     }
 }

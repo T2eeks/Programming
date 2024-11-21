@@ -99,11 +99,17 @@ namespace ObjectOrientedPractics.View.Tabs
             try
             {
                 CostTextBox.BackColor = Color.White;
-                ValueValidator.AssertOnPositiveValue(Convert.ToDouble(CostTextBox.Text), 0, 100000, nameof(Item.Cost));
 
+                // Преобразуем значение из TextBox в float
+                float cost = float.Parse(CostTextBox.Text);
+
+                // Валидируем стоимость, преобразуя float в double для метода валидатора
+                ValueValidator.AssertOnPositiveValue((double)cost, 0, 100000, nameof(Item.Cost));
+
+                // Если выбран элемент в ListBox, обновляем его стоимость
                 if (ItemsListBox.SelectedIndex >= 0)
                 {
-                    _items[ItemsListBox.SelectedIndex].Cost = Convert.ToDouble(CostTextBox.Text);
+                    _items[ItemsListBox.SelectedIndex].Cost = cost;
                     UpdateItemsListBox(ItemsListBox.SelectedIndex);
                 }
             }
@@ -148,28 +154,38 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             try
             {
+                // Получаем выбранную категорию
                 Category selectedCategory = (Category)Enum.Parse(typeof(Category), CategoryComboBox.SelectedItem.ToString());
-                Item addItem = new Item(NameTextBox.Text, DescriptionTextBox.Text, Convert.ToDouble(CostTextBox.Text), selectedCategory);
-                _items.Add(addItem);
-                ItemsListBox.Items.Add(addItem.Name + " стоит - " + addItem.Cost);
 
+                // Преобразуем значение из CostTextBox в float
+                float cost = float.Parse(CostTextBox.Text);
+
+                // Создаем новый объект Item
+                Item addItem = new Item(NameTextBox.Text, DescriptionTextBox.Text, cost, selectedCategory);
+
+                // Добавляем объект в список и в ListBox
+                _items.Add(addItem);
+                ItemsListBox.Items.Add($"{addItem.Name} стоит - {addItem.Cost}");
+
+                // Очищаем текстовые поля и ComboBox
                 NameTextBox.Text = "";
                 DescriptionTextBox.Text = "";
                 CostTextBox.Text = "";
                 IdTextBox.Text = "";
                 CategoryComboBox.Items.Clear();
 
-
-
+                // Сбрасываем фон всех текстовых полей
                 NameTextBox.BackColor = Color.White;
                 DescriptionTextBox.BackColor = Color.White;
                 CostTextBox.BackColor = Color.White;
                 IdTextBox.BackColor = Color.White;
 
+                // Заполняем ComboBox значениями категорий
                 CategoryComboBox.Items.AddRange(Enum.GetValues(typeof(Category)).Cast<object>().ToArray());
             }
             catch (Exception ex)
             {
+                // Обрабатываем ошибки и показываем сообщение
                 MessageBox.Show("Произошла ошибка при добавлении - " + ex.Message);
             }
         }

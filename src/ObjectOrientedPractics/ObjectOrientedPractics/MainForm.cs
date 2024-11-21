@@ -16,7 +16,6 @@ namespace ObjectOrientedPractics
             cartsTab1.Items = _store.Items;
             cartsTab1.Customers = _store.Customers;
             ordeersTab1.Customers = _store.Customers;
-            priorityOrdersTab1.Items = _store.Items;
         }
 
 
@@ -39,13 +38,6 @@ namespace ObjectOrientedPractics
                 if (ordeersTab1.Customers != null)
                 {
                     ordeersTab1.RefreshData();
-                }
-            }
-            if (OrderTab.SelectedIndex == 4)
-            {
-                if (priorityOrdersTab1.Items != null)
-                {
-                    priorityOrdersTab1.UpdateOrderDetails();
                 }
             }
         }

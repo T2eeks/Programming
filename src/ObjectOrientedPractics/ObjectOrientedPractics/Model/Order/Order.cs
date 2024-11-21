@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ObjectOrientedPractics.Model.Order;
+using ObjectOrientedPractics.Model.Enums;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Order
 {
     public class Order
     {
@@ -39,6 +41,11 @@ namespace ObjectOrientedPractics.Model
         private List<Item> _items;
 
         /// <summary>
+        /// Суммарная скидка заказа.
+        /// </summary>
+        public double DiscountAmount { get; }
+
+        /// <summary>
         /// Возвращает уникальный идентификатор клиента 
         /// </summary>
         public int Id
@@ -71,7 +78,7 @@ namespace ObjectOrientedPractics.Model
             get { return _status; }
             set { _status = value; }
         }
-        
+
 
         /// <summary>
         /// Возвращает или задает список товаров в заказе
@@ -99,17 +106,29 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
+        /// Возращает конечную стоимость заказа.
+        /// </summary>
+        public double Total
+        {
+            get
+            {
+                return TotalAmount - DiscountAmount;
+            }
+        }
+
+        /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Order"/> с указанным адресом доставки и списком товаров
         /// </summary>
         /// <param name="deliveryAddress">Адрес доставки </param>
         /// <param name="items">Список товаров </param>
-        public Order(Address deliveryAddress, List<Item> items)
+        public Order(Address deliveryAddress, List<Item> items, double discountAmount)
         {
             _id = _nextId++;
             _creationDate = DateTime.Now;
             _deliveryAddress = deliveryAddress;
             Status = OrderStatus.New;
             Items = items;
+            DiscountAmount = discountAmount;
         }
 
     }

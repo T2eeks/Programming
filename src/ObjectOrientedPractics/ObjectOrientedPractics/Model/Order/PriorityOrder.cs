@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ObjectOrientedPractics.Model.Enums;
+using ObjectOrientedPractics.Model.Order;
 
-namespace ObjectOrientedPractics.Model
+
+namespace ObjectOrientedPractics.Model.Order
 {
     public class PriorityOrder : Order
     {
@@ -27,7 +30,8 @@ namespace ObjectOrientedPractics.Model
         public PriorityOrder(
           Address address,
           List<Item> items,
-          DateTime date) : base(address, items)
+          DateTime date,
+          double discoutAmount) : base(address, items,discoutAmount)
         {
             Date = date;
         }

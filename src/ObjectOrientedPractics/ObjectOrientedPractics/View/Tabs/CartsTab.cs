@@ -1,4 +1,5 @@
 ﻿using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Model.Order;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -186,13 +187,13 @@ namespace ObjectOrientedPractics.View.Tabs
             if (_currentCustomer.IsPriority)
             {
 
-                var priorityOrder = new PriorityOrder(_currentCustomer.Address, items, DateTime.Now);
+                var priorityOrder = new PriorityOrder(_currentCustomer.Address, items, DateTime.Now,0);
                 _currentCustomer.Orders.Add(priorityOrder);
             }
             else
             {
                 // Создание обычного заказа
-                var order = new Order(_currentCustomer.Address, items);
+                var order = new Order(_currentCustomer.Address, items,0);
                 _currentCustomer.Orders.Add(order);
             }
 

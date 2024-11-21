@@ -40,6 +40,12 @@ namespace ObjectOrientedPractics.Services
                 throw new ArgumentException($"{propertyName} должен быть не меньше {minValue} и не больше {maxValue} символов.");
         }
 
+        public static void AssertOnPositiveValue(float value, float minValue, float maxValue, string propertyName)
+        {
+            if (value < minValue || value > maxValue)
+                throw new ArgumentException($"{propertyName} должен быть не меньше {minValue} и не больше {maxValue} символов.");
+        }
+
 
         /// <summary>
         ///  Проверяет, что значение находится в заданом диапозоне
@@ -53,6 +59,22 @@ namespace ObjectOrientedPractics.Services
             if (value < minValue || value > maxValue)
             {
                 throw new ArgumentException($"{propertyName} должен быть не меньше {minValue} и не больше {maxValue}. Текущее значение: {value}");
+            }
+        }
+
+        /// <summary>
+        /// Проверка, входит ли целочисленное значение в заданный нижний предел.
+        /// </summary>
+        /// <param name="value">Входное значение.</param>
+        /// <param name="minimum">Минимальное число (нижняя граница).</param>
+        /// <param name="propertyName">Имя свойства класса.</param>
+        public static void AssertIntOnLowerLimit(int value, int minimum, string propertyName)
+        {
+            if (value < minimum)
+            {
+                throw new
+                    ArgumentException(
+                    $"{propertyName} должно быть больше {minimum}.");
             }
         }
 
