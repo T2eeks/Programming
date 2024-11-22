@@ -78,6 +78,7 @@ namespace ObjectOrientedPractics.View.Tabs
                         customer.FullName,
                         address,
                         order.TotalAmount.ToString("F2"),
+                        order.Total,
                         order.Status.ToString()
                     );
 
@@ -157,7 +158,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 OrderItemsListBox.Items.Add($"{item.Name} - {item.Cost:C}");
             }
 
-            amountValueLabel.Text = _selectedOrder.TotalAmount.ToString("F2");
+            amountValueLabel.Text = _selectedOrder.Total.ToString();
 
             if (_selectedPriorityOrder != null)
             {

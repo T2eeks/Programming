@@ -80,7 +80,7 @@ namespace ObjectOrientedPractics
         {
             set
             {
-                ValueValidator.AssertOnPositiveValue(value,0, 100000, nameof(Cost));
+                ValueValidator.AssertOnPositiveFloatValue(value,0, 100000, nameof(Cost));
                 _cost = value;
             }
             get { return _cost; }

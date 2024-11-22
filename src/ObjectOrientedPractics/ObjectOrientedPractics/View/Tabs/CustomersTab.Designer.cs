@@ -41,9 +41,17 @@
             RemoveButton = new Button();
             panel1 = new Panel();
             panel2 = new Panel();
+            panel3 = new Panel();
+            DiscountsTableLayoutPanel = new TableLayoutPanel();
+            AddDiscountButton = new Button();
+            RemoveDiscountButton = new Button();
+            DiscountsListBox = new ListBox();
+            DiscountsLabel = new Label();
             IsPriorityCheckBox = new CheckBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            panel3.SuspendLayout();
+            DiscountsTableLayoutPanel.SuspendLayout();
             SuspendLayout();
             // 
             // label5
@@ -97,7 +105,6 @@
             IdTextBox.ReadOnly = true;
             IdTextBox.Size = new Size(161, 27);
             IdTextBox.TabIndex = 16;
-            IdTextBox.TextChanged += IdTextBox_TextChanged;
             // 
             // CustomersListBox
             // 
@@ -112,6 +119,7 @@
             // 
             // AddressControl
             // 
+
             AddressControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             AddressControl.Location = new Point(3, 148);
             AddressControl.Name = "AddressControl";
@@ -157,6 +165,7 @@
             // 
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             panel2.BackColor = SystemColors.ButtonHighlight;
+            panel2.Controls.Add(panel3);
             panel2.Controls.Add(IsPriorityCheckBox);
             panel2.Controls.Add(AddressControl);
             panel2.Controls.Add(label5);
@@ -168,8 +177,78 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(531, 564);
             panel2.TabIndex = 30;
-            panel2.Click += panel2_Click;
-            panel2.Paint += panel2_Paint;
+            // 
+            // panel3
+            // 
+            panel3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panel3.Controls.Add(DiscountsTableLayoutPanel);
+            panel3.Controls.Add(DiscountsListBox);
+            panel3.Controls.Add(DiscountsLabel);
+            panel3.Location = new Point(4, 404);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(501, 160);
+            panel3.TabIndex = 29;
+            // 
+            // DiscountsTableLayoutPanel
+            // 
+            DiscountsTableLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            DiscountsTableLayoutPanel.ColumnCount = 1;
+            DiscountsTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            DiscountsTableLayoutPanel.Controls.Add(AddDiscountButton, 0, 0);
+            DiscountsTableLayoutPanel.Controls.Add(RemoveDiscountButton, 0, 1);
+            DiscountsTableLayoutPanel.Location = new Point(331, 24);
+            DiscountsTableLayoutPanel.Margin = new Padding(4);
+            DiscountsTableLayoutPanel.Name = "DiscountsTableLayoutPanel";
+            DiscountsTableLayoutPanel.RowCount = 2;
+            DiscountsTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            DiscountsTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            DiscountsTableLayoutPanel.Size = new Size(137, 111);
+            DiscountsTableLayoutPanel.TabIndex = 17;
+            // 
+            // AddDiscountButton
+            // 
+            AddDiscountButton.Location = new Point(4, 4);
+            AddDiscountButton.Margin = new Padding(4);
+            AddDiscountButton.Name = "AddDiscountButton";
+            AddDiscountButton.Size = new Size(129, 47);
+            AddDiscountButton.TabIndex = 16;
+            AddDiscountButton.Text = "Add";
+            AddDiscountButton.UseVisualStyleBackColor = true;
+            AddDiscountButton.Click += AddDiscountButton_Click;
+            // 
+            // RemoveDiscountButton
+            // 
+            RemoveDiscountButton.Location = new Point(4, 59);
+            RemoveDiscountButton.Margin = new Padding(4);
+            RemoveDiscountButton.Name = "RemoveDiscountButton";
+            RemoveDiscountButton.Size = new Size(129, 48);
+            RemoveDiscountButton.TabIndex = 17;
+            RemoveDiscountButton.Text = "Remove";
+            RemoveDiscountButton.UseVisualStyleBackColor = true;
+            RemoveDiscountButton.Click += RemoveDiscountButton_Click;
+            // 
+            // DiscountsListBox
+            // 
+            DiscountsListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            DiscountsListBox.Enabled = false;
+            DiscountsListBox.FormattingEnabled = true;
+            DiscountsListBox.ItemHeight = 20;
+            DiscountsListBox.Location = new Point(7, 24);
+            DiscountsListBox.Margin = new Padding(4);
+            DiscountsListBox.Name = "DiscountsListBox";
+            DiscountsListBox.Size = new Size(316, 104);
+            DiscountsListBox.TabIndex = 16;
+            // 
+            // DiscountsLabel
+            // 
+            DiscountsLabel.AutoSize = true;
+            DiscountsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            DiscountsLabel.Location = new Point(6, 0);
+            DiscountsLabel.Margin = new Padding(4, 0, 4, 0);
+            DiscountsLabel.Name = "DiscountsLabel";
+            DiscountsLabel.Size = new Size(73, 20);
+            DiscountsLabel.TabIndex = 14;
+            DiscountsLabel.Text = "Discounts";
             // 
             // IsPriorityCheckBox
             // 
@@ -190,11 +269,13 @@
             Controls.Add(panel1);
             Name = "CustomersTab";
             Size = new Size(868, 585);
-            Click += CustomersTab_Click;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            DiscountsTableLayoutPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -213,5 +294,11 @@
         private Panel panel1;
         private Panel panel2;
         private CheckBox IsPriorityCheckBox;
+        private Panel panel3;
+        private Label DiscountsLabel;
+        private TableLayoutPanel DiscountsTableLayoutPanel;
+        private Button AddDiscountButton;
+        private Button RemoveDiscountButton;
+        private ListBox DiscountsListBox;
     }
 }

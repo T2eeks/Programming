@@ -31,12 +31,6 @@
             Model.Address address1 = new Model.Address();
             panel1 = new Panel();
             OrdersDataGridView = new DataGridView();
-            Id = new DataGridViewTextBoxColumn();
-            Created = new DataGridViewTextBoxColumn();
-            OrderFullName = new DataGridViewTextBoxColumn();
-            DeliveryAddress = new DataGridViewTextBoxColumn();
-            Price = new DataGridViewTextBoxColumn();
-            Status = new DataGridViewTextBoxColumn();
             panel2 = new Panel();
             PriorityPanel = new Panel();
             DeliveryTimeComboBox = new ComboBox();
@@ -55,6 +49,13 @@
             OrderItemsListBox = new ListBox();
             label5 = new Label();
             addressControl1 = new Controls.AddressControl();
+            Id = new DataGridViewTextBoxColumn();
+            Created = new DataGridViewTextBoxColumn();
+            OrderFullName = new DataGridViewTextBoxColumn();
+            DeliveryAddress = new DataGridViewTextBoxColumn();
+            Price = new DataGridViewTextBoxColumn();
+            Total = new DataGridViewTextBoxColumn();
+            Status = new DataGridViewTextBoxColumn();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)OrdersDataGridView).BeginInit();
             panel2.SuspendLayout();
@@ -80,7 +81,7 @@
             OrdersDataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             OrdersDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             OrdersDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            OrdersDataGridView.Columns.AddRange(new DataGridViewColumn[] { Id, Created, OrderFullName, DeliveryAddress, Price, Status });
+            OrdersDataGridView.Columns.AddRange(new DataGridViewColumn[] { Id, Created, OrderFullName, DeliveryAddress, Price, Total, Status });
             OrdersDataGridView.Location = new Point(0, 0);
             OrdersDataGridView.Name = "OrdersDataGridView";
             OrdersDataGridView.ReadOnly = true;
@@ -89,48 +90,6 @@
             OrdersDataGridView.Size = new Size(651, 610);
             OrdersDataGridView.TabIndex = 0;
             OrdersDataGridView.SelectionChanged += OrdersDataGridView_SelectionChanged;
-            // 
-            // Id
-            // 
-            Id.HeaderText = "ID";
-            Id.MinimumWidth = 6;
-            Id.Name = "Id";
-            Id.ReadOnly = true;
-            // 
-            // Created
-            // 
-            Created.HeaderText = "Created";
-            Created.MinimumWidth = 6;
-            Created.Name = "Created";
-            Created.ReadOnly = true;
-            // 
-            // OrderFullName
-            // 
-            OrderFullName.HeaderText = "Order Full Name";
-            OrderFullName.MinimumWidth = 6;
-            OrderFullName.Name = "OrderFullName";
-            OrderFullName.ReadOnly = true;
-            // 
-            // DeliveryAddress
-            // 
-            DeliveryAddress.HeaderText = "Delivery Address";
-            DeliveryAddress.MinimumWidth = 6;
-            DeliveryAddress.Name = "DeliveryAddress";
-            DeliveryAddress.ReadOnly = true;
-            // 
-            // Price
-            // 
-            Price.HeaderText = "Price";
-            Price.MinimumWidth = 6;
-            Price.Name = "Price";
-            Price.ReadOnly = true;
-            // 
-            // Status
-            // 
-            Status.HeaderText = "Status";
-            Status.MinimumWidth = 6;
-            Status.Name = "Status";
-            Status.ReadOnly = true;
             // 
             // panel2
             // 
@@ -312,12 +271,60 @@
             // 
             // addressControl1
             // 
-
             addressControl1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             addressControl1.Location = new Point(3, 160);
             addressControl1.Name = "addressControl1";
             addressControl1.Size = new Size(510, 236);
             addressControl1.TabIndex = 0;
+            // 
+            // Id
+            // 
+            Id.HeaderText = "ID";
+            Id.MinimumWidth = 6;
+            Id.Name = "Id";
+            Id.ReadOnly = true;
+            // 
+            // Created
+            // 
+            Created.HeaderText = "Created";
+            Created.MinimumWidth = 6;
+            Created.Name = "Created";
+            Created.ReadOnly = true;
+            // 
+            // OrderFullName
+            // 
+            OrderFullName.HeaderText = "Order Full Name";
+            OrderFullName.MinimumWidth = 6;
+            OrderFullName.Name = "OrderFullName";
+            OrderFullName.ReadOnly = true;
+            // 
+            // DeliveryAddress
+            // 
+            DeliveryAddress.HeaderText = "Delivery Address";
+            DeliveryAddress.MinimumWidth = 6;
+            DeliveryAddress.Name = "DeliveryAddress";
+            DeliveryAddress.ReadOnly = true;
+            // 
+            // Price
+            // 
+            Price.HeaderText = "Price";
+            Price.MinimumWidth = 6;
+            Price.Name = "Price";
+            Price.ReadOnly = true;
+            // 
+            // Total
+            // 
+            Total.HeaderText = "Total";
+            Total.MinimumWidth = 6;
+            Total.Name = "Total";
+            Total.ReadOnly = true;
+            // 
+            // Status
+            // 
+            Status.HeaderText = "Status";
+            Status.MinimumWidth = 6;
+            Status.Name = "Status";
+            Status.ReadOnly = true;
             // 
             // OrdeersTab
             // 
@@ -355,16 +362,17 @@
         private Label label5;
         private Label amountValueLabel;
         private Label label6;
-        private DataGridViewTextBoxColumn Id;
-        private DataGridViewTextBoxColumn Created;
-        private DataGridViewTextBoxColumn OrderFullName;
-        private DataGridViewTextBoxColumn DeliveryAddress;
-        private DataGridViewTextBoxColumn Price;
-        private DataGridViewTextBoxColumn Status;
         private Panel panel3;
         private Panel PriorityPanel;
         private ComboBox DeliveryTimeComboBox;
         private Label DeliveryTimeLabel;
         private Label PriorityOptionLabel;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn Created;
+        private DataGridViewTextBoxColumn OrderFullName;
+        private DataGridViewTextBoxColumn DeliveryAddress;
+        private DataGridViewTextBoxColumn Price;
+        private DataGridViewTextBoxColumn Total;
+        private DataGridViewTextBoxColumn Status;
     }
 }

@@ -40,7 +40,7 @@ namespace ObjectOrientedPractics.Services
                 throw new ArgumentException($"{propertyName} должен быть не меньше {minValue} и не больше {maxValue} символов.");
         }
 
-        public static void AssertOnPositiveValue(float value, float minValue, float maxValue, string propertyName)
+        public static void AssertOnPositiveFloatValue(float value, float minValue, float maxValue, string propertyName)
         {
             if (value < minValue || value > maxValue)
                 throw new ArgumentException($"{propertyName} должен быть не меньше {minValue} и не больше {maxValue} символов.");

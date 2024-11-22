@@ -79,6 +79,7 @@
             // cartsTab1
             // 
             cartsTab1.Customers = null;
+            cartsTab1.DiscountAmount = new decimal(new int[] { 0, 0, 0, 0 });
             cartsTab1.Dock = DockStyle.Fill;
             cartsTab1.Items = null;
             cartsTab1.Location = new Point(3, 3);
