@@ -40,6 +40,21 @@ namespace ObjectOrientedPractics
         private float _cost;
 
         /// <summary>
+        /// Событие, возникающее при изменении свойства Name.
+        /// </summary>
+        public event EventHandler<EventArgs> NameChanged;
+
+        /// <summary>
+        /// Событие, возникающее при изменении свойства Info.
+        /// </summary>
+        public event EventHandler<EventArgs> InfoChanged;
+
+        /// <summary>
+        /// Событие, возникающее при изменении свойства Cost.
+        /// </summary>
+        public event EventHandler<EventArgs> CostChanged;
+
+        /// <summary>
         /// Возвращает уникальный идентификатор товара
         /// </summary>
         public int Id
@@ -55,7 +70,11 @@ namespace ObjectOrientedPractics
             set
             {
                 ValueValidator.AssertStringOnLength(value, 200, nameof(Name));
-                _name = value;
+                if (_name != value)
+                {
+                    _name = value;
+                    NameChanged?.Invoke(this, EventArgs.Empty);
+                }
             }
             get { return _name; }
         }
@@ -68,7 +87,11 @@ namespace ObjectOrientedPractics
             set
             {
                 ValueValidator.AssertStringOnLength(value, 1000, nameof(Info));
-                _info = value;
+                if (_info != value)
+                {
+                    _info = value;
+                    InfoChanged?.Invoke(this, EventArgs.Empty);
+                }
             }
             get { return _info; }
         }
@@ -80,8 +103,12 @@ namespace ObjectOrientedPractics
         {
             set
             {
-                ValueValidator.AssertOnPositiveFloatValue(value,0, 100000, nameof(Cost));
-                _cost = value;
+                ValueValidator.AssertOnPositiveFloatValue(value, 0, 100000, nameof(Cost));
+                if (_cost != value)
+                {
+                    _cost = value;
+                    CostChanged?.Invoke(this, EventArgs.Empty);
+                }
             }
             get { return _cost; }
         }

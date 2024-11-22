@@ -14,6 +14,10 @@ namespace ObjectOrientedPractics.View.Tabs
         private Item _item;
 
         /// <summary>
+        /// Событие при обновлении информации о товарах <see cref="Item"/>.
+        /// </summary>
+        public event EventHandler<EventArgs> ItemsChanged;
+        /// <summary>
         /// Делегат для сортировки.
         /// </summary>
         private Func<Item, Item, bool> SortCompare { get; set; }
@@ -31,6 +35,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 _items = value;
                 UpdateDisplayedItems();
                 SortComboBox.SelectedIndex = 0;
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -38,15 +43,12 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             InitializeComponent();
 
-            // Добавляем категории в CategoryComboBox
             CategoryComboBox.Items.AddRange(Enum.GetValues(typeof(Category)).Cast<object>().ToArray());
 
-            // Добавляем варианты сортировки в SortComboBox
             SortComboBox.Items.Add("Name");
             SortComboBox.Items.Add("Price Asc");
             SortComboBox.Items.Add("Price Desc");
 
-            // Устанавливаем первый элемент как выбранный
             if (SortComboBox.Items.Count > 0)
             {
                 SortComboBox.SelectedIndex = 0;
@@ -55,20 +57,15 @@ namespace ObjectOrientedPractics.View.Tabs
             SortComboBox.SelectedIndexChanged += SortComboBox_SelectedIndexChanged;
         }
 
-        /// <summary>
-        /// Обновить список товаров на основе фильтрации и сортировки.
-        /// </summary>
         private void UpdateDisplayedItems()
         {
             var displayedItems = Items;
 
-            // Фильтрация
             if (FilterCompare != null)
             {
                 displayedItems = DataTools.FilterItems(displayedItems, FilterCompare);
             }
 
-            // Сортировка
             if (SortCompare != null)
             {
                 displayedItems = DataTools.SortItems(displayedItems, SortCompare);
@@ -78,34 +75,34 @@ namespace ObjectOrientedPractics.View.Tabs
             UpdateDisplayedItemsListBox();
         }
 
-        /// <summary>
-        /// Обновить элементы в ListBox.
-        /// </summary>
         private void UpdateDisplayedItemsListBox()
         {
+            int selectedIndex = ItemsListBox.SelectedIndex;
             ItemsListBox.Items.Clear();
             foreach (var item in _displayedItems)
             {
                 ItemsListBox.Items.Add($"{item.Name} стоит - {item.Cost}");
             }
+
+            if (selectedIndex >= 0 && selectedIndex < ItemsListBox.Items.Count)
+            {
+                ItemsListBox.SelectedIndex = selectedIndex;
+            }
         }
 
-        /// <summary>
-        /// Изменить сортировку по выбранному критерию.
-        /// </summary>
         private void SortComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (SortComboBox.SelectedIndex)
             {
-                case 0: // По имени
+                case 0:
                     SortCompare = (firstItem, secondItem) => firstItem.Name.CompareTo(secondItem.Name) < 0;
                     break;
 
-                case 1: // По возрастанию цены
+                case 1:
                     SortCompare = (firstItem, secondItem) => firstItem.Cost.CompareTo(secondItem.Cost) < 0;
                     break;
 
-                case 2: // По убыванию цены
+                case 2:
                     SortCompare = (firstItem, secondItem) => firstItem.Cost.CompareTo(secondItem.Cost) > 0;
                     break;
             }
@@ -119,7 +116,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
             if (string.IsNullOrEmpty(query))
             {
-                FilterCompare = null; // Показываем весь список
+                FilterCompare = null;
             }
             else
             {
@@ -154,6 +151,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 CategoryComboBox.Items.AddRange(Enum.GetValues(typeof(Category)).Cast<object>().ToArray());
 
                 UpdateDisplayedItems();
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
             catch (Exception ex)
             {
@@ -198,6 +196,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 }
 
                 UpdateDisplayedItems();
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
             catch (Exception ex)
             {
@@ -216,6 +215,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 {
                     _item.Name = NameTextBox.Text;
                     UpdateDisplayedItems();
+                    ItemsChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
             catch
@@ -235,6 +235,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 {
                     _item.Info = DescriptionTextBox.Text;
                     UpdateDisplayedItems();
+                    ItemsChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
             catch
@@ -256,6 +257,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 {
                     _item.Cost = cost;
                     UpdateDisplayedItems();
+                    ItemsChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
             catch
@@ -277,6 +279,25 @@ namespace ObjectOrientedPractics.View.Tabs
 
             UpdateDisplayedItems();
         }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+        }
+
+        private void panel2_Click(object sender, EventArgs e)
+        {
+            ItemsListBox.SetSelected(0, false);
+            NameTextBox.Text = "";
+            DescriptionTextBox.Text = "";
+            CostTextBox.Text = "";
+            IdTextBox.Text = "";
+            CategoryComboBox.Items.Clear();
+
+            NameTextBox.BackColor = Color.White;
+            DescriptionTextBox.BackColor = Color.White;
+            CostTextBox.BackColor = Color.White;
+            IdTextBox.BackColor = Color.White;
+        }
     }
-    
+
 }

@@ -19,6 +19,18 @@ namespace ObjectOrientedPractics
         }
 
 
+        /// <summary>
+        /// Событие при обновлении данных о товарах или покупателях.
+        /// </summary>
+        /// <param name="sender">Элемент управления, вызвавший событие.</param>
+        /// <param name="args">Данные о событии.</param>
+        private void DataChanged(object sender, EventArgs args)
+        {
+            cartsTab1.RefreshData();
+            ordeersTab1.RefreshData();
+        }
+
+
         private void MainForm_Load(object sender, EventArgs e)
         {
              

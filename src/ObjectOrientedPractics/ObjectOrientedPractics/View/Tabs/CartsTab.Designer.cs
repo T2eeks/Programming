@@ -216,20 +216,20 @@
             // 
             TotalLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             TotalLabel.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            TotalLabel.Location = new Point(325, 166);
+            TotalLabel.Location = new Point(382, 142);
             TotalLabel.Margin = new Padding(4, 0, 4, 0);
             TotalLabel.Name = "TotalLabel";
             TotalLabel.RightToLeft = RightToLeft.No;
             TotalLabel.Size = new Size(121, 25);
             TotalLabel.TabIndex = 20;
-            TotalLabel.Text = "0";
+            TotalLabel.Text = "Total";
             TotalLabel.TextAlign = ContentAlignment.TopRight;
             // 
             // discountAmountLabel
             // 
             discountAmountLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             discountAmountLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            discountAmountLabel.Location = new Point(397, 41);
+            discountAmountLabel.Location = new Point(449, 41);
             discountAmountLabel.Margin = new Padding(4, 0, 4, 0);
             discountAmountLabel.Name = "discountAmountLabel";
             discountAmountLabel.RightToLeft = RightToLeft.No;
@@ -243,12 +243,12 @@
             totalAmountLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             totalAmountLabel.AutoSize = true;
             totalAmountLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            totalAmountLabel.Location = new Point(426, 141);
+            totalAmountLabel.Location = new Point(476, 167);
             totalAmountLabel.Margin = new Padding(4, 0, 4, 0);
             totalAmountLabel.Name = "totalAmountLabel";
-            totalAmountLabel.Size = new Size(72, 25);
+            totalAmountLabel.Size = new Size(22, 25);
             totalAmountLabel.TabIndex = 19;
-            totalAmountLabel.Text = "TOTAL:";
+            totalAmountLabel.Text = "0";
             // 
             // panel4
             // 

@@ -247,6 +247,8 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(451, 582);
             panel2.TabIndex = 14;
+            panel2.Click += panel2_Click;
+            panel2.Paint += panel2_Paint;
             // 
             // label6
             // 
