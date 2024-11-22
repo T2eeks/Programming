@@ -27,11 +27,10 @@ namespace ObjectOrientedPractics.View.Tabs
         public CustomersTab()
         {
             InitializeComponent();
+
+            AddressControl.Address = new Address();
         }
 
-        /// <summary>
-        /// Очищает поля ввода данных о клиенте
-        /// </summary>
         private void ClearingFields()
         {
             IdTextBox.Text = "";

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Model.Address address1 = new Model.Address();
             label5 = new Label();
             label4 = new Label();
             label1 = new Label();
@@ -119,9 +118,8 @@
             // 
             // AddressControl
             // 
-
             AddressControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            AddressControl.Location = new Point(3, 148);
+            AddressControl.Location = new Point(3, 147);
             AddressControl.Name = "AddressControl";
             AddressControl.Size = new Size(515, 250);
             AddressControl.TabIndex = 27;
