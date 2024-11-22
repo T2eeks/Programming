@@ -151,6 +151,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 CategoryComboBox.Items.AddRange(Enum.GetValues(typeof(Category)).Cast<object>().ToArray());
 
                 UpdateDisplayedItems();
+
                 ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
             catch (Exception ex)
