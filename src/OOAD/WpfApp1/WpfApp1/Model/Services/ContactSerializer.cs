@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MVVMApp.Model
+namespace View.Model.Services
 {
-    internal class Contact
+    internal class ContactSerializer
     {
     }
 }
