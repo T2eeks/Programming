@@ -35,7 +35,7 @@
                     <Label Content="Name:" Margin="3"/>
                     <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="3"/>
                     <Label Content="Phone Number:" Margin="3"/>
-                    <TextBox Text="{Binding Number, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Margin="3">
+                    <TextBox Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Margin="3">
                         <Validation.ErrorTemplate>
                             <ControlTemplate>
                                 <StackPanel>
@@ -65,7 +65,7 @@
                     <Label Content="Name:" Margin="3"/>
                     <TextBlock Text="{Binding Name}" Margin="3" FontWeight="Bold"/>
                     <Label Content="Phone Number:" Margin="3"/>
-                    <TextBlock Text="{Binding Number}" Margin="3" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding PhoneNumber}" Margin="3" FontWeight="Bold"/>
                     <Label Content="Email:" Margin="3"/>
                     <TextBlock Text="{Binding Email}" Margin="3" FontWeight="Bold"/>
                 </StackPanel>
