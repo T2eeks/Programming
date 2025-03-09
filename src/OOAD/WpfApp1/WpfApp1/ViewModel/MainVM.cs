@@ -5,19 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using View.Model;
+using System.Windows.Input;
+using View.Model.Services;
 
 namespace View.ViewModel
 {
-    internal class MainVM : INotifyPropertyChanged
+    public class MainVM : INotifyPropertyChanged
     {
         private Contact _contact;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public ICommand SaveCommand { get; }
+        public ICommand LoadCommand { get; }
 
-        public MainVM()
-        {
-            _contact = new Contact();
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public string Name
         {
@@ -74,6 +74,12 @@ namespace View.ViewModel
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public MainVM()
+        {
+            _contact = new Contact();
+            SaveCommand = new SaveCommand(this);
+            LoadCommand = new LoadCommand(this);
         }
     }
 }
