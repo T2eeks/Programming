@@ -10,12 +10,24 @@ using System.Windows;
 
 namespace View.Model.Services
 {
+    /// <summary>
+    /// Класс, отвечающий за сериализацию и десериализацию контактов.
+    /// </summary>
     internal class ContactSerializer
     {
+        /// <summary>
+        /// Путь по умолчанию для хранения файла контактов.
+        /// </summary>
         private static readonly string DefaultPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Contacts", "contacts.json");
 
+        /// <summary>
+        /// Путь к файлу контактов, который используется в текущем экземпляре.
+        /// </summary>
         public string FilePath { get; set; }
 
+        /// <summary>
+        /// Конструктор, инициализирующий путь к файлу и создающий необходимые директории.
+        /// </summary>
         public ContactSerializer()
         {
             FilePath = DefaultPath;
@@ -23,6 +35,9 @@ namespace View.Model.Services
 
         }
 
+        /// <summary>
+        /// Проверяет существование директории, если её нет – создаёт.
+        /// </summary>
         private void EnsureDirectoryExists()
         {
             string directory = Path.GetDirectoryName(FilePath);
@@ -33,6 +48,10 @@ namespace View.Model.Services
             }
         }
 
+        /// <summary>
+        /// Сохраняет контакт в файл JSON.
+        /// </summary>
+        /// <param name="contact">Контакт для сохранения.</param>
         public void SaveContact(Contact contact)
         {
             try
@@ -46,7 +65,10 @@ namespace View.Model.Services
             }
         }
 
-
+        /// <summary>
+        /// Загружает контакт из файла JSON.
+        /// </summary>
+        /// <returns>Загруженный контакт или новый экземпляр, если файл отсутствует.</returns>
         public Contact LoadContact()
         {
             try

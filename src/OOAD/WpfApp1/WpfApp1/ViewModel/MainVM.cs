@@ -10,15 +10,34 @@ using View.Model.Services;
 
 namespace View.ViewModel
 {
+    /// <summary>
+    /// Главная ViewModel для управления контактными данными.
+    /// </summary>
     public class MainVM : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Контакт, содержащий текущие данные.
+        /// </summary>
         private Contact _contact;
 
+        /// <summary>
+        /// Команда сохранения данных в файл.
+        /// </summary>
         public ICommand SaveCommand { get; }
+
+        /// <summary>
+        /// Команда загрузки данных в файл.
+        /// </summary>
         public ICommand LoadCommand { get; }
 
+        /// <summary>
+        /// Событие, уведомляющее об изменении свойства
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Имя человека.
+        /// </summary>
         public string Name
         {
             get { return _contact.Name; }
@@ -32,6 +51,9 @@ namespace View.ViewModel
             }
         }
 
+        /// <summary>
+        /// Номер телефона человека.
+        /// </summary>
         public string PhoneNumber
         {
             get { return _contact.Number; }
@@ -45,6 +67,9 @@ namespace View.ViewModel
             }
         }
 
+        /// <summary>
+        /// Электронная почта человека.
+        /// </summary>
         public string Email
         {
             get { return _contact.Email; }
@@ -58,6 +83,9 @@ namespace View.ViewModel
             }
         }
 
+        /// <summary>
+        /// Объект контакта.
+        /// </summary>
         public Contact Contact
         {
             get { return _contact; }
@@ -71,10 +99,18 @@ namespace View.ViewModel
             }
         }
 
+        /// <summary>
+        /// Вызывает событие PropertyChanged для обновления привязанных данных.
+        /// </summary>
+        /// <param name="propertyName">Имя измененного свойства.</param>
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        /// <summary>
+        /// Создаёт новый экземпляр ViewModel и инициализирует команды.
+        /// </summary>
         public MainVM()
         {
             _contact = new Contact();
