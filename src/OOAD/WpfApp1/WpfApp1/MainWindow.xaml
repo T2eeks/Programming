@@ -35,7 +35,7 @@
                     <Label Content="Name:" Margin="3"/>
                     <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="3"/>
                     <Label Content="Phone Number:" Margin="3"/>
-                    <TextBox Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Margin="3">
+                    <TextBox Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Margin="3">
                         <Validation.ErrorTemplate>
                             <ControlTemplate>
                                 <StackPanel>
@@ -46,7 +46,7 @@
                         </Validation.ErrorTemplate>
                     </TextBox>
                     <Label Content="Email:" Margin="3"/>
-                    <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Margin="3">
+                    <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Margin="3">
                         <Validation.ErrorTemplate>
                             <ControlTemplate>
                                 <StackPanel>
@@ -63,11 +63,11 @@
             <GroupBox Header="Read Contact" Grid.Column="1" Margin="10">
                 <StackPanel Margin="10">
                     <Label Content="Name:" Margin="3"/>
-                    <TextBlock Text="{Binding Name}" Margin="3" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="3" FontWeight="Bold"/>
                     <Label Content="Phone Number:" Margin="3"/>
-                    <TextBlock Text="{Binding PhoneNumber}" Margin="3" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Margin="3" FontWeight="Bold"/>
                     <Label Content="Email:" Margin="3"/>
-                    <TextBlock Text="{Binding Email}" Margin="3" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Margin="3" FontWeight="Bold"/>
                 </StackPanel>
             </GroupBox>
         </Grid>

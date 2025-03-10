@@ -6,23 +6,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Windows;
 
 namespace View.Model.Services
 {
     internal class ContactSerializer
     {
         private static readonly string DefaultPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Contacts", "contacts.json");
+
         public string FilePath { get; set; }
 
         public ContactSerializer()
         {
             FilePath = DefaultPath;
             EnsureDirectoryExists();
+
         }
 
         private void EnsureDirectoryExists()
         {
             string directory = Path.GetDirectoryName(FilePath);
+
             if (!Directory.Exists(directory))
             {
                 Directory.CreateDirectory(directory);
@@ -42,12 +46,15 @@ namespace View.Model.Services
             }
         }
 
+
         public Contact LoadContact()
         {
             try
             {
+               
                 if (!File.Exists(FilePath))
                 {
+                    MessageBox.Show("Файл не найден.");
                     return new Contact();
                 }
 
@@ -59,5 +66,6 @@ namespace View.Model.Services
                 throw new Exception("Ошибка при загрузке контакта", ex);
             }
         }
+
     }
 }
