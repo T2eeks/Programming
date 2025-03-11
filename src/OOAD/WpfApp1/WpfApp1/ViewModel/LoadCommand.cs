@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Xml.Serialization;
 using View.Model.Services;
+using View.Model;
 
 namespace View.ViewModel
 {
@@ -59,7 +61,10 @@ namespace View.ViewModel
         /// <param name="parameter">Не используется.</param>
         public void Execute(object parameter)
         {
-            var loadedContact = _serializer.LoadContact();
+            ContactSerializer serializer = new ContactSerializer();
+            List<Contact> contacts = serializer.LoadContact();
+            
+            Contact loadedContact = contacts.FirstOrDefault();
 
             if (_viewModel != null && loadedContact != null)
             {
@@ -67,6 +72,12 @@ namespace View.ViewModel
                 _viewModel.PhoneNumber = loadedContact.Number;
                 _viewModel.Email = loadedContact.Email;
             }
+            else if (_viewModel != null)
+            {
+                _viewModel.Name = string.Empty;
+                _viewModel.PhoneNumber = string.Empty;
+                 _viewModel.Email = string.Empty;
+            }    
         }
     }
 }

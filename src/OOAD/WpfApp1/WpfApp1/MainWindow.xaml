@@ -15,42 +15,57 @@
 
     <DockPanel LastChildFill="True">
 
-        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="3">
-            <Button Content="Save" Width="75" Height="25" Margin="3" Command="{Binding SaveCommand}"/>
-            <Button Content="Load" Width="75" Height="25" Margin="3" Command="{Binding LoadCommand}"/>
-        </StackPanel>
-
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3" />
+                <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
 
-            <GroupBox Header="Edit Contact" Grid.Column="0" Margin="10">
-                <StackPanel Margin="10">
-                    <Label Content="Name:" Margin="3"/>
-                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="3"/>
-                    <Label Content="Phone Number:" Margin="3"/>
-                    <TextBox Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Margin="3">
-                       
-                    </TextBox>
-                    <Label Content="Email:" Margin="3"/>
-                    <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Margin="3">
-                       
-                    </TextBox>
-                </StackPanel>
-            </GroupBox>
+            <StackPanel Grid.Column="0" Margin="8" Background="#f8f8f8">
+                <Label Content="Find:" Width="35" Height="27" HorizontalAlignment="Left" Margin="8,8,8,-25" />
+                <TextBox Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" Width="251" HorizontalAlignment="Right" Margin="8,0,8,2.7" />
 
-            <GroupBox Header="Read Contact" Grid.Column="1" Margin="10">
-                <StackPanel Margin="10">
-                    <Label Content="Name:" Margin="3"/>
-                    <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="3" FontWeight="Bold"/>
-                    <Label Content="Phone Number:" Margin="3"/>
-                    <TextBlock Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Margin="3" FontWeight="Bold"/>
-                    <Label Content="Email:" Margin="3"/>
-                    <TextBlock Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Margin="3" FontWeight="Bold"/>
-                </StackPanel>
-            </GroupBox>
+                <ListBox ItemsSource="{Binding Contacts}"
+                 SelectedItem="{Binding SelectedContact, Mode=TwoWay}"
+                 DisplayMemberPath="Name" 
+                 Height="348" Margin="8,3,8,3" />
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="3">
+                    <Button Content="Add" Width="95" Height="25" Margin="3" Command="{Binding AddCommand}" />
+                    <Button Content="Edit" Width="94" Height="25" Margin="3" Command="{Binding EditCommand}" />
+                    <Button Content="Remove" Width="92" Height="25" Margin="3" Command="{Binding RemoveCommand}" />
+                </StackPanel >
+            </StackPanel>
+
+            <GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Stretch" Background="White" />
+
+            <StackPanel Grid.Column="2" Margin="8" Background="White">
+                <Grid Height="251">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="47*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image Source="Properties/placeholder.png" Width="100" Margin="0,19.1,0,0" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Grid.Row="1" />
+
+                    <StackPanel Grid.Column="1" Margin="3,4,3,-8" Grid.RowSpan="2">
+                        <Label Content="Name:" Margin="3,3,3,3" />
+                        <TextBox Text="{Binding SelectedContact.Name}" IsReadOnly="True" Margin="3" />
+
+                        <Label Content="Phone Number:" Margin="3" />
+                        <TextBox Text="{Binding SelectedContact.Number}" IsReadOnly="True" Margin="3" />
+
+                        <Label Content="Email:" Margin="3" />
+                        <TextBox Text="{Binding SelectedContact.Email}" IsReadOnly="True" Margin="3,4,3,3" />
+                        <Button Content="Apply" Width="75" Height="25" Command="{Binding ApplyCommand}" HorizontalAlignment="Left" Margin="3,58,0,4" />
+                    </StackPanel>
+                </Grid>
+
+            </StackPanel>
         </Grid>
     </DockPanel>
 </Window>
