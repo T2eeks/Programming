@@ -31,14 +31,14 @@ namespace View.Model.Services
         public ContactSerializer()
         {
             FilePath = DefaultPath;
-            EnsureDirectoryExists();
+            CreateDirectoryIfNotExist();
 
         }
 
         /// <summary>
         /// Проверяет существование директории, если её нет – создаёт.
         /// </summary>
-        private void EnsureDirectoryExists()
+        private void CreateDirectoryIfNotExist()
         {
             string directory = Path.GetDirectoryName(FilePath);
 
@@ -73,7 +73,6 @@ namespace View.Model.Services
         {
             try
             {
-               
                 if (!File.Exists(FilePath))
                 {
                     MessageBox.Show("Файл не найден.");

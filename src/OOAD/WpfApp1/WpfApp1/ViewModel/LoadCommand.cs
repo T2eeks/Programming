@@ -20,7 +20,7 @@ namespace View.ViewModel
         private readonly ContactSerializer _serializer;
 
         /// <summary>
-        /// Вью- модель, в которую загружаются данные.
+        /// Вью-модель, в которую загружаются данные.
         /// </summary>
         private readonly MainVM _viewModel;
 
@@ -66,9 +66,7 @@ namespace View.ViewModel
                 _viewModel.Name = loadedContact.Name;
                 _viewModel.PhoneNumber = loadedContact.Number;
                 _viewModel.Email = loadedContact.Email;
-
             }
-  
         }
     }
 }

@@ -31,7 +31,7 @@ namespace View.ViewModel
         public ICommand LoadCommand { get; }
 
         /// <summary>
-        /// Событие, уведомляющее об изменении свойства
+        /// Событие, уведомляющее об изменении свойства.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 

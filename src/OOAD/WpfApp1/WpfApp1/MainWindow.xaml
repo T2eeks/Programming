@@ -15,16 +15,15 @@
 
     <DockPanel LastChildFill="True">
 
-        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="3
-                    ">
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="3">
             <Button Content="Save" Width="75" Height="25" Margin="3" Command="{Binding SaveCommand}"/>
             <Button Content="Load" Width="75" Height="25" Margin="3" Command="{Binding LoadCommand}"/>
         </StackPanel>
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <GroupBox Header="Edit Contact" Grid.Column="0" Margin="10">
