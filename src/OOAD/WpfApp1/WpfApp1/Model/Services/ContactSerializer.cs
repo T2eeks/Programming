@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Windows;
+using System.CodeDom;
+using System.Security.Cryptography;
 
 namespace View.Model.Services
 {
@@ -15,6 +17,7 @@ namespace View.Model.Services
     /// </summary>
     internal class ContactSerializer
     {
+
         /// <summary>
         /// Путь по умолчанию для хранения файла контактов.
         /// </summary>
@@ -56,6 +59,10 @@ namespace View.Model.Services
         {
             try
             {
+                if (contacts == null)
+                {     
+                    contacts = new List<Contact>();
+                }
                 string json = JsonConvert.SerializeObject(contacts, Newtonsoft.Json.Formatting.Indented);
                 File.WriteAllText(FilePath, json);
             }
@@ -75,11 +82,16 @@ namespace View.Model.Services
             {
                 if (!File.Exists(FilePath))
                 {
-                    MessageBox.Show("Файл не найден.");
                     return new List<Contact>();
+                }  
+                string json = File.ReadAllText(FilePath);
+
+                if (json.TrimStart().StartsWith("{"))
+                {  
+                    Contact singleContact = JsonConvert.DeserializeObject<Contact>(json);
+                    return new List<Contact> { singleContact };
                 }
 
-                string json = File.ReadAllText(FilePath);
                 return JsonConvert.DeserializeObject<List<Contact>>(json) ?? new List<Contact>();
             }
             catch (Exception ex)
