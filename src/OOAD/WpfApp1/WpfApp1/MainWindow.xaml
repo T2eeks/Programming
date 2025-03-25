@@ -3,54 +3,82 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-         xmlns:local="clr-namespace:WpfApp1"
+        xmlns:local="clr-namespace:WpfApp1"
         xmlns:vm="clr-namespace:View.ViewModel"
         mc:Ignorable="d"
-        Title="Contacts" Height="450" Width="800"
-        Padding="15">
+        Title="Contacts" Height="460" Width="810">
 
+    <Window.Resources>
+        <vm:BoolToVisibilityConverterVM x:Key="BoolToVisibilityConverterVM"/>
+    </Window.Resources>
     <Window.DataContext>
         <vm:MainVM />
     </Window.DataContext>
 
-    <DockPanel LastChildFill="True">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" MinWidth="150" />
+            <ColumnDefinition Width="3" />
+            <ColumnDefinition Width="3*" MinWidth="250" />
+        </Grid.ColumnDefinitions>
 
-        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="3">
-            <Button Content="Save" Width="75" Height="25" Margin="3" Command="{Binding SaveCommand}"/>
-            <Button Content="Load" Width="75" Height="25" Margin="3" Command="{Binding LoadCommand}"/>
+        <StackPanel Grid.Column="0" Margin="8" Background="#f8f8f8">
+            <Label Content="Find:" Width="35" Height="27" HorizontalAlignment="Left" Margin="8,8,8,-25" />
+            <TextBox Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" 
+                     Width="251" HorizontalAlignment="Right" Margin="8,0,8,2.7" />
+
+            <ListBox ItemsSource="{Binding Contacts}"
+                     SelectedItem="{Binding SelectedContact, Mode=TwoWay}"
+                     DisplayMemberPath="Name" 
+                     Height="348" Margin="8,3,8,3" />
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="3">
+                <Button Content="Add" Width="95" Height="25" Margin="3" 
+                        Command="{Binding AddCommand}" 
+                        IsEnabled="{Binding CanAdd}" />
+                <Button Content="Edit" Width="94" Height="25" Margin="3" 
+                        Command="{Binding EditCommand}" 
+                        IsEnabled="{Binding CanEditOrRemove}" />
+                <Button Content="Remove" Width="92" Height="25" Margin="3" 
+                        Command="{Binding RemoveCommand}" 
+                        IsEnabled="{Binding CanEditOrRemove}" />
+            </StackPanel>
         </StackPanel>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Stretch" Background="White" />
 
-            <GroupBox Header="Edit Contact" Grid.Column="0" Margin="10">
-                <StackPanel Margin="10">
-                    <Label Content="Name:" Margin="3"/>
-                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="3"/>
-                    <Label Content="Phone Number:" Margin="3"/>
-                    <TextBox Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Margin="3">
-                       
-                    </TextBox>
-                    <Label Content="Email:" Margin="3"/>
-                    <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Margin="3">
-                       
-                    </TextBox>
-                </StackPanel>
-            </GroupBox>
+        <StackPanel Grid.Column="2" Margin="8" Background="White">
+            <Grid Height="251">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="47*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Source="Properties/placeholder.png" Width="100" Margin="0,19.1,0,0" 
+                       HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Grid.Row="1" />
 
-            <GroupBox Header="Read Contact" Grid.Column="1" Margin="10">
-                <StackPanel Margin="10">
-                    <Label Content="Name:" Margin="3"/>
-                    <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="3" FontWeight="Bold"/>
-                    <Label Content="Phone Number:" Margin="3"/>
-                    <TextBlock Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Margin="3" FontWeight="Bold"/>
-                    <Label Content="Email:" Margin="3"/>
-                    <TextBlock Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Margin="3" FontWeight="Bold"/>
+                <StackPanel Grid.Column="1" Margin="3,4,3,-8" Grid.RowSpan="2">
+                    <Label Content="Name:" Margin="3,3,3,3" />
+                    <TextBox Text="{Binding TempName, UpdateSourceTrigger=PropertyChanged}" 
+                             IsReadOnly="{Binding IsReadOnly}" Margin="3" />
+
+                    <Label Content="Phone Number:" Margin="3" />
+                    <TextBox Text="{Binding TempPhoneNumber, UpdateSourceTrigger=PropertyChanged}" 
+                             IsReadOnly="{Binding IsReadOnly}" Margin="3" />
+
+                    <Label Content="Email:" Margin="3" />
+                    <TextBox Text="{Binding TempEmail, UpdateSourceTrigger=PropertyChanged}" 
+                             IsReadOnly="{Binding IsReadOnly}" Margin="3,4,3,3" />
+
+                    <Button Content="Apply" Width="75" Height="25" 
+                            Command="{Binding ApplyCommand}" 
+                            HorizontalAlignment="Left" Margin="3,58,0,4"
+                            Visibility="{Binding IsApplyButtonVisible, Converter={StaticResource BoolToVisibilityConverterVM}}" />
                 </StackPanel>
-            </GroupBox>
-        </Grid>
-    </DockPanel>
+            </Grid>
+        </StackPanel>
+    </Grid>
 </Window>
