@@ -12,8 +12,13 @@ namespace WpfApp1.ViewModel
     /// </summary>
     internal class BaseCommand : ICommand
     {
-
+        /// <summary>
+        /// Делегат выполняющий команду.
+        /// </summary>
         private readonly Action<object> _execute;
+        /// <summary>
+        /// Делегат,определяющий можно ли выполнить команду.
+        /// </summary>
         private readonly Func<object, bool> _canExecute;
 
         /// <summary>
