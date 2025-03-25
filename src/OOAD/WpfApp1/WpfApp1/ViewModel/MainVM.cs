@@ -208,7 +208,7 @@ namespace View.ViewModel
             OnPropertyChanged(nameof(IsApplyButtonVisible));
             OnPropertyChanged(nameof(IsReadOnly));
             OnPropertyChanged(nameof(CanAdd));
-            OnPropertyChanged(nameof(CanEditOrRemove));
+            OnPropertyChanged(nameof(CanEditOrRemove)); 
 
             ResetFields();
         }
