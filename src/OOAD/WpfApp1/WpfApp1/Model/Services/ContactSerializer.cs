@@ -96,7 +96,7 @@ namespace View.Model.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("Ошибка при загрузке контакта", ex);
+                throw new Exception("Ошибка при загрузке контакта", ex); 
             }
         }
 

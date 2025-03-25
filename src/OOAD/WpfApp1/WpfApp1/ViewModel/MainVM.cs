@@ -157,7 +157,7 @@ namespace View.ViewModel
         {
             get { return IsContactSelected && !_isEditing && !_isAddingNewContact; }
         }
-
+        
         /// <summary>
         /// Сбрасывает временные поля для редактирования.
         /// </summary>
@@ -206,12 +206,10 @@ namespace View.ViewModel
 
             ResetFields();
 
-            _selectedContact = null;
-
             OnPropertyChanged(nameof(IsApplyButtonVisible));
             OnPropertyChanged(nameof(IsReadOnly));
             OnPropertyChanged(nameof(CanAdd));
-            OnPropertyChanged(nameof(CanEditOrRemove)); 
+            OnPropertyChanged(nameof(CanEditOrRemove));
         }
 
         /// <summary>

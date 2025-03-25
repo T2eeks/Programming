@@ -24,8 +24,9 @@ namespace View.ViewModel
             {
                 return isVisible ? Visibility.Visible : Visibility.Collapsed;
             }
-            return Visibility.Collapsed; 
-        }
+            return Visibility.Collapsed;
+        } 
+        
 
         /// <summary>
         /// Преобразует Visibility обратно в bool (не используется в данном случае).
