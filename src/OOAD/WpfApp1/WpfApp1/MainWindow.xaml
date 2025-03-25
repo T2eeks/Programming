@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfApp1"
         xmlns:vm="clr-namespace:View.ViewModel"
         mc:Ignorable="d"
-        Title="Contacts" Height="458" Width="600">
+        Title="Contacts" Height="460" Width="810">
 
     <Window.Resources>
         <vm:BoolToVisibilityConverterVM x:Key="BoolToVisibilityConverterVM"/>

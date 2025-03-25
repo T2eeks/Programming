@@ -202,15 +202,16 @@ namespace View.ViewModel
         private void AddContact(object obj)
         {
             _isAddingNewContact = true;
-            SelectedContact = null;
             IsApplyButtonVisible = true;
+
+            ResetFields();
+
+            _selectedContact = null;
 
             OnPropertyChanged(nameof(IsApplyButtonVisible));
             OnPropertyChanged(nameof(IsReadOnly));
             OnPropertyChanged(nameof(CanAdd));
             OnPropertyChanged(nameof(CanEditOrRemove)); 
-
-            ResetFields();
         }
 
         /// <summary>
