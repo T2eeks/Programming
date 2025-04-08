@@ -160,6 +160,12 @@ namespace View.ViewModel
             }
         }
 
+        /// <summary>
+        /// Индексатор для валидации свойств объекта (реализация IDataErrorInfo).
+        /// Возвращает сообщение об ошибке для указанного свойства, если ошибка есть.
+        /// </summary>
+        /// <param name="columnName">Имя свойства, для которого нужно получить сообщение об ошибке.</param>
+        /// <returns>Сообщение об ошибке или null, если ошибок нет.</returns>
         public string this[string columnName]
         {
             get
@@ -169,8 +175,18 @@ namespace View.ViewModel
             }
         }
 
+        /// <summary>
+        /// Реализация свойства Error интерфейса IDataErrorInfo.
+        /// Возвращает объединенные сообщения об ошибках для всех свойств.
+        /// </summary>
         public string Error => string.Join("\n", _errors.Values);
 
+        /// <summary>
+        /// Выполняет валидацию указанного свойства и обновляет словарь ошибок.
+        /// Проверяет свойства TempName, TempPhoneNumber и TempEmail на соответствие заданным правилам.
+        /// </summary>
+        /// <param name="propertyName">Имя свойства, которое нужно валидировать.</param>
+        /// <param name="value">Значение свойства для валидации.</param>
         private void ValidateProperty(string propertyName, string value)
         {
             string error = null;

@@ -32,7 +32,6 @@
             <ColumnDefinition Width="3*" MinWidth="250" />
         </Grid.ColumnDefinitions>
 
-        <!-- Left Column -->
         <Grid Grid.Column="0" Background="#f8f8f8" Margin="15,15,3,15">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -51,21 +50,19 @@
                      ItemTemplate="{StaticResource contactTemplate}" />
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="3" HorizontalAlignment="Center">
-                <Button Content="Add" Height="25" Width="57" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                <Button Content="Add" Height="25" Width="95" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                         Command="{Binding AddCommand}" 
                         IsEnabled="{Binding CanAdd}" />
-                <Button Content="Edit" Height="25" Width="57" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                <Button Content="Edit" Height="25" Width="94" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                         Command="{Binding EditCommand}" 
                         IsEnabled="{Binding CanEditOrRemove}" />
-                <Button Content="Remove" Height="25" Width="57" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                <Button Content="Remove" Height="25" Width="93" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                         Command="{Binding RemoveCommand}" 
                         IsEnabled="{Binding CanEditOrRemove}" />
             </StackPanel>
         </Grid>
 
         <GridSplitter Grid.Column="1" Width="3" Background="White" HorizontalAlignment="Stretch" />
-
-        <!-- Right Column -->
         <StackPanel Grid.Column="2" Margin="7,3,2,0" VerticalAlignment="Top">
             <controls:ContactControl Margin="7,3,2,0" VerticalAlignment="Top"/>
             <Button Content="Apply" Width="75" Height="25" Margin="3" VerticalAlignment="Top" 
