@@ -33,13 +33,17 @@
 
                 <StackPanel Grid.Column="1" Margin="3">
                     <TextBlock Text="Name:" />
-                    <TextBox Margin="3" Text="{Binding TempName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Margin="3" Text="{Binding TempName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                             IsReadOnly="{Binding IsReadOnly}"/>
                     <TextBlock Text="Phone Number:" />
-                    <TextBox Margin="3" Text="{Binding TempPhoneNumber, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox x:Name="PhoneNumberTextBox" Margin="3" 
+                             Text="{Binding TempPhoneNumber, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                              PreviewTextInput="PhoneNumberTextBox_PreviewTextInput"
-                             DataObject.Pasting="PhoneNumberTextBox_Pasting"/>
+                             DataObject.Pasting="PhoneNumberTextBox_Pasting"
+                             IsReadOnly="{Binding IsReadOnly}"/>
                     <TextBlock Text="Email:" />
-                    <TextBox Margin="3" Text="{Binding TempEmail, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Margin="3" Text="{Binding TempEmail, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                             IsReadOnly="{Binding IsReadOnly}"/>
                 </StackPanel>
             </Grid>
         </StackPanel>

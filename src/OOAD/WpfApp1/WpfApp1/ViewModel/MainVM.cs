@@ -24,6 +24,9 @@ namespace View.ViewModel
         private string _tempName;
         private string _tempPhoneNumber;
         private string _tempEmail;
+        private bool _isNameTouched;
+        private bool _isPhoneNumberTouched;
+        private bool _isEmailTouched;
         private ContactSerializer _serializer;
         private readonly Dictionary<string, string> _errors = new Dictionary<string, string>();
 
@@ -71,6 +74,8 @@ namespace View.ViewModel
             set
             {
                 _tempName = value;
+                if (!string.IsNullOrEmpty(value))
+                    _isNameTouched = true;
                 OnPropertyChanged(nameof(TempName));
                 OnPropertyChanged(nameof(IsContactValid));
                 ValidateProperty(nameof(TempName), value);
@@ -86,6 +91,8 @@ namespace View.ViewModel
             set
             {
                 _tempPhoneNumber = value;
+                if (!string.IsNullOrEmpty(value))
+                    _isPhoneNumberTouched = true; ;
                 ValidateProperty(nameof(TempPhoneNumber), value);
                 OnPropertyChanged(nameof(TempPhoneNumber));
                 OnPropertyChanged(nameof(IsContactValid));
@@ -101,6 +108,8 @@ namespace View.ViewModel
             set
             {
                 _tempEmail = value;
+                if (!string.IsNullOrEmpty(value))
+                    _isEmailTouched = true;
                 OnPropertyChanged(nameof(TempEmail));
                 ValidateProperty(nameof(TempEmail), value);
                 OnPropertyChanged(nameof(IsContactValid));
@@ -121,7 +130,6 @@ namespace View.ViewModel
                     {
                         _isAddingNewContact = false;
                         _isEditing = false;
-                        ResetFields();
                         IsApplyButtonVisible = false;
                         OnPropertyChanged(nameof(IsApplyButtonVisible));
                         OnPropertyChanged(nameof(IsReadOnly));
@@ -137,6 +145,11 @@ namespace View.ViewModel
                         TempName = _selectedContact.Name;
                         TempPhoneNumber = _selectedContact.Number;
                         TempEmail = _selectedContact.Email;
+                    }
+
+                    else
+                    {
+                        ResetFields();
                     }
 
                     OnPropertyChanged(nameof(SelectedContact));
@@ -165,28 +178,37 @@ namespace View.ViewModel
             switch (propertyName)
             {
                 case nameof(TempName):
-                    if (string.IsNullOrWhiteSpace(value))
-                        error = "Name is required.";
-                    else if (value.Length > 100)
-                        error = "Name cannot be longer than 100 characters.";
+                    if (_isNameTouched)
+                    {
+                        if (string.IsNullOrWhiteSpace(value))
+                            error = "Name is required.";
+                        else if (value.Length > 100)
+                            error = "Name cannot be longer than 100 characters.";
+                    }
                     break;
 
                 case nameof(TempPhoneNumber):
-                    if (string.IsNullOrWhiteSpace(value))
-                        error = "Phone number is required.";
-                    else if (value.Length > 100)
-                        error = "Phone number cannot be longer than 100 characters.";
-                    else if (!Regex.IsMatch(value, @"^\+\d{1,3}\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$"))
-                        error = "Phone number must match the format. Example: +7 (999) 111-11-11";
+                    if (_isPhoneNumberTouched)
+                    {
+                        if (string.IsNullOrWhiteSpace(value))
+                            error = "Phone number is required.";
+                        else if (value.Length > 100)
+                            error = "Phone number cannot be longer than 100 characters.";
+                        else if (!Regex.IsMatch(value, @"^\+\d{1,3}\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$"))
+                            error = "Phone number must match the format. Example: +7 (999) 111-11-11";
+                    }
                     break;
 
                 case nameof(TempEmail):
-                    if (string.IsNullOrWhiteSpace(value))
-                        error = "Email is required.";
-                    else if (value.Length > 100)
-                        error = "Email cannot be longer than 100 characters.";
-                    else if (!Regex.IsMatch(value, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-                        error = "Invalid email format.";
+                    if (_isEmailTouched)
+                    {
+                        if (string.IsNullOrWhiteSpace(value))
+                            error = "Email is required.";
+                        else if (value.Length > 100)
+                            error = "Email cannot be longer than 100 characters.";
+                        else if (!Regex.IsMatch(value, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+                            error = "Invalid email format.";
+                    }
                     break;
             }
 
@@ -302,6 +324,12 @@ namespace View.ViewModel
             TempName = string.Empty;
             TempPhoneNumber = string.Empty;
             TempEmail = string.Empty;
+
+            _isNameTouched = false;
+            _isPhoneNumberTouched = false;
+            _isEmailTouched = false;
+
+            _errors.Clear();
 
             OnPropertyChanged(nameof(TempName));
             OnPropertyChanged(nameof(TempPhoneNumber));
