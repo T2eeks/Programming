@@ -9,13 +9,14 @@ using System.Windows.Input;
 using View.Model.Services;
 using System.Collections.ObjectModel;
 using WpfApp1.ViewModel;
+using System.Text.RegularExpressions;
 
 namespace View.ViewModel
 {
     /// <summary>
     /// Главная ViewModel для управления контактными данными.
     /// </summary>
-    public class MainVM : INotifyPropertyChanged
+    public class MainVM : INotifyPropertyChanged, IDataErrorInfo
     {
         private Contact _selectedContact;
         private bool _isEditing;
@@ -23,7 +24,11 @@ namespace View.ViewModel
         private string _tempName;
         private string _tempPhoneNumber;
         private string _tempEmail;
+        private bool _isNameTouched;
+        private bool _isPhoneNumberTouched;
+        private bool _isEmailTouched;
         private ContactSerializer _serializer;
+        private readonly Dictionary<string, string> _errors = new Dictionary<string, string>();
 
         /// <summary>
         /// Получает или задает видимость кнопки "Применить".
@@ -69,7 +74,11 @@ namespace View.ViewModel
             set
             {
                 _tempName = value;
+                if (!string.IsNullOrEmpty(value))
+                    _isNameTouched = true;
                 OnPropertyChanged(nameof(TempName));
+                OnPropertyChanged(nameof(IsContactValid));
+                ValidateProperty(nameof(TempName), value);
             }
         }
 
@@ -82,7 +91,11 @@ namespace View.ViewModel
             set
             {
                 _tempPhoneNumber = value;
+                if (!string.IsNullOrEmpty(value))
+                    _isPhoneNumberTouched = true; ;
+                ValidateProperty(nameof(TempPhoneNumber), value);
                 OnPropertyChanged(nameof(TempPhoneNumber));
+                OnPropertyChanged(nameof(IsContactValid));
             }
         }
 
@@ -95,7 +108,11 @@ namespace View.ViewModel
             set
             {
                 _tempEmail = value;
+                if (!string.IsNullOrEmpty(value))
+                    _isEmailTouched = true;
                 OnPropertyChanged(nameof(TempEmail));
+                ValidateProperty(nameof(TempEmail), value);
+                OnPropertyChanged(nameof(IsContactValid));
             }
         }
 
@@ -107,22 +124,142 @@ namespace View.ViewModel
             get { return _selectedContact; }
             set
             {
-                if (_isAddingNewContact || _isEditing)
+                if (_selectedContact != value)
                 {
-                    _isAddingNewContact = false;
-                    _isEditing = false;
-                    ResetFields();
-                    IsApplyButtonVisible = false;
-                    OnPropertyChanged(nameof(IsApplyButtonVisible));
-                    OnPropertyChanged(nameof(IsReadOnly));
-                    OnPropertyChanged(nameof(CanEditOrRemove));
-                    OnPropertyChanged(nameof(CanAdd));
-                }
+                    if (_isAddingNewContact || _isEditing)
+                    {
+                        _isAddingNewContact = false;
+                        _isEditing = false;
+                        IsApplyButtonVisible = false;
+                        OnPropertyChanged(nameof(IsApplyButtonVisible));
+                        OnPropertyChanged(nameof(IsReadOnly));
+                        OnPropertyChanged(nameof(CanEdit));
+                        OnPropertyChanged(nameof(CanRemove));
+                        OnPropertyChanged(nameof(CanAdd));
+                    }
 
-                _selectedContact = value;
-                UpdateFields();
-                OnPropertyChanged(nameof(SelectedContact));
-                OnPropertyChanged(nameof(IsContactSelected));
+                    _selectedContact = value;
+
+                    if (_selectedContact != null && !_isAddingNewContact && !_isEditing)
+                    {
+                        TempName = _selectedContact.Name;
+                        TempPhoneNumber = _selectedContact.Number;
+                        TempEmail = _selectedContact.Email;
+                    }
+
+                    else
+                    {
+                        ResetFields();
+                    }
+
+                    OnPropertyChanged(nameof(SelectedContact));
+                    OnPropertyChanged(nameof(IsContactSelected));
+                    OnPropertyChanged(nameof(CanEdit));
+                    OnPropertyChanged(nameof(CanRemove));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Индексатор для валидации свойств объекта (реализация IDataErrorInfo).
+        /// Возвращает сообщение об ошибке для указанного свойства, если ошибка есть.
+        /// </summary>
+        /// <param name="columnName">Имя свойства, для которого нужно получить сообщение об ошибке.</param>
+        /// <returns>Сообщение об ошибке или null, если ошибок нет.</returns>
+        public string this[string columnName]
+        {
+            get
+            {
+                _errors.TryGetValue(columnName, out var error);
+                return error;
+            }
+        }
+
+        /// <summary>
+        /// Реализация свойства Error интерфейса IDataErrorInfo.
+        /// Возвращает объединенные сообщения об ошибках для всех свойств.
+        /// </summary>
+        public string Error => string.Join("\n", _errors.Values);
+
+        /// <summary>
+        /// Выполняет валидацию указанного свойства и обновляет словарь ошибок.
+        /// Проверяет свойства TempName, TempPhoneNumber и TempEmail на соответствие заданным правилам.
+        /// </summary>
+        /// <param name="propertyName">Имя свойства, которое нужно валидировать.</param>
+        /// <param name="value">Значение свойства для валидации.</param>
+        private void ValidateProperty(string propertyName, string value)
+        {
+            string error = null;
+
+            switch (propertyName)
+            {
+                case nameof(TempName):
+                    if (_isNameTouched)
+                    {
+                        if (string.IsNullOrWhiteSpace(value))
+                            error = "Name is required.";
+                        else if (value.Length > 100)
+                            error = "Name cannot be longer than 100 characters.";
+                    }
+                    break;
+
+                case nameof(TempPhoneNumber):
+                    if (_isPhoneNumberTouched)
+                    {
+                        if (string.IsNullOrWhiteSpace(value))
+                            error = "Phone number is required.";
+                        else if (value.Length > 100)
+                            error = "Phone number cannot be longer than 100 characters.";
+                        else if (!Regex.IsMatch(value, @"^\+\d{1,3}\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$"))
+                            error = "Phone number must match the format. Example: +7 (999) 111-11-11";
+                    }
+                    break;
+
+                case nameof(TempEmail):
+                    if (_isEmailTouched)
+                    {
+                        if (string.IsNullOrWhiteSpace(value))
+                            error = "Email is required.";
+                        else if (value.Length > 100)
+                            error = "Email cannot be longer than 100 characters.";
+                        else if (!Regex.IsMatch(value, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+                            error = "Invalid email format.";
+                    }
+                    break;
+            }
+
+            if (error != null)
+                _errors[propertyName] = error;
+            else
+                _errors.Remove(propertyName);
+        }
+
+        /// <summary>
+        /// Обновляет временные поля для редактирования.
+        /// </summary>
+        private void UpdateFields()
+        {
+            if (_isAddingNewContact)
+            {
+                TempName = string.Empty;
+                TempPhoneNumber = string.Empty;
+                TempEmail = string.Empty;
+            }
+            else if (_isEditing && SelectedContact != null)
+            {
+                TempName = SelectedContact.Name;
+                TempPhoneNumber = SelectedContact.Number;
+                TempEmail = SelectedContact.Email;
+            }
+            else if (SelectedContact != null)
+            {
+                TempName = SelectedContact.Name;
+                TempPhoneNumber = SelectedContact.Number;
+                TempEmail = SelectedContact.Email;
+            }
+            else
+            {
+                ResetFields();
             }
         }
 
@@ -151,13 +288,50 @@ namespace View.ViewModel
         }
 
         /// <summary>
-        /// Получает значение, указывающее, можно ли редактировать или удалить контакт.
+        /// Получает значение, указывающее, можно ли редактировать контакт.
         /// </summary>
-        public bool CanEditOrRemove
+        public bool CanEdit
         {
             get { return IsContactSelected && !_isEditing && !_isAddingNewContact; }
         }
-        
+
+        /// <summary>
+        /// Получает значение, указывающее, можно ли удалить контакт.
+        /// </summary>
+        public bool CanRemove
+        {
+            get { return IsContactSelected && !_isEditing && !_isAddingNewContact; }
+        }
+
+        /// <summary>
+        /// Получает значение, указывающее, видима ли кнопка "Применить".
+        /// </summary>
+        public bool CanApply
+        {
+            get { return IsApplyButtonVisible; }
+        }
+
+        /// <summary>
+        /// Получает значение, указывающее, находится ли приложение в режиме редактирования.
+        /// </summary>
+        public bool IsEditing
+        {
+            get { return !IsReadOnly; }
+        }
+
+        /// <summary>
+        /// Получает значение, указывающее, валидны ли данные контакта.
+        /// </summary>
+        public bool IsContactValid
+        {
+            get
+            {
+                return !_errors.ContainsKey(nameof(TempName)) &&
+                       !_errors.ContainsKey(nameof(TempPhoneNumber)) &&
+                       !_errors.ContainsKey(nameof(TempEmail));
+            }
+        }
+
         /// <summary>
         /// Сбрасывает временные поля для редактирования.
         /// </summary>
@@ -167,32 +341,15 @@ namespace View.ViewModel
             TempPhoneNumber = string.Empty;
             TempEmail = string.Empty;
 
+            _isNameTouched = false;
+            _isPhoneNumberTouched = false;
+            _isEmailTouched = false;
+
+            _errors.Clear();
+
             OnPropertyChanged(nameof(TempName));
             OnPropertyChanged(nameof(TempPhoneNumber));
             OnPropertyChanged(nameof(TempEmail));
-        }
-
-        /// <summary>
-        /// Обновляет временные поля в зависимости от состояния.
-        /// </summary>
-        private void UpdateFields()
-        {
-            if (_isAddingNewContact)
-            {
-                TempName = string.Empty;
-                TempPhoneNumber = string.Empty;
-                TempEmail = string.Empty;
-            }
-            else if (SelectedContact != null)
-            {
-                TempName = SelectedContact.Name;
-                TempPhoneNumber = SelectedContact.Number;
-                TempEmail = SelectedContact.Email;
-            }
-            else
-            {
-                ResetFields();
-            }
         }
 
         /// <summary>
@@ -206,10 +363,15 @@ namespace View.ViewModel
 
             ResetFields();
 
+            _selectedContact = null;
+            OnPropertyChanged(nameof(SelectedContact));
+            OnPropertyChanged(nameof(IsContactSelected));
+
             OnPropertyChanged(nameof(IsApplyButtonVisible));
             OnPropertyChanged(nameof(IsReadOnly));
             OnPropertyChanged(nameof(CanAdd));
-            OnPropertyChanged(nameof(CanEditOrRemove));
+            OnPropertyChanged(nameof(CanEdit));
+            OnPropertyChanged(nameof(CanRemove));
         }
 
         /// <summary>
@@ -221,13 +383,16 @@ namespace View.ViewModel
             if (SelectedContact != null)
             {
                 _isEditing = true;
-                UpdateFields();
+                TempName = SelectedContact.Name;
+                TempPhoneNumber = SelectedContact.Number;
+                TempEmail = SelectedContact.Email;
                 IsApplyButtonVisible = true;
 
                 OnPropertyChanged(nameof(IsApplyButtonVisible));
                 OnPropertyChanged(nameof(IsReadOnly));
                 OnPropertyChanged(nameof(CanAdd));
-                OnPropertyChanged(nameof(CanEditOrRemove));
+                OnPropertyChanged(nameof(CanEdit));
+                OnPropertyChanged(nameof(CanRemove));
             }
         }
 
@@ -262,7 +427,8 @@ namespace View.ViewModel
             OnPropertyChanged(nameof(IsApplyButtonVisible));
             OnPropertyChanged(nameof(IsReadOnly));
             OnPropertyChanged(nameof(CanAdd));
-            OnPropertyChanged(nameof(CanEditOrRemove));
+            OnPropertyChanged(nameof(CanEdit));
+            OnPropertyChanged(nameof(CanRemove));
         }
 
         /// <summary>
@@ -296,6 +462,8 @@ namespace View.ViewModel
                 SaveContacts();
 
                 OnPropertyChanged(nameof(IsContactSelected));
+                OnPropertyChanged(nameof(CanEdit));
+                OnPropertyChanged(nameof(CanRemove));
             }
         }
 
@@ -344,8 +512,8 @@ namespace View.ViewModel
 
             AddCommand = new BaseCommand(AddContact, (obj) => CanAdd);
             ApplyCommand = new BaseCommand(ApplyContact);
-            EditCommand = new BaseCommand(EditContact, (obj) => CanEditOrRemove);
-            RemoveCommand = new BaseCommand(RemoveContact, (obj) => CanEditOrRemove);
+            EditCommand = new BaseCommand(EditContact, (obj) => CanEdit);
+            RemoveCommand = new BaseCommand(RemoveContact, (obj) => CanRemove);
 
             LoadContacts();
         }

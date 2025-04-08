@@ -361,3 +361,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/src/OOAD/WpfApp1/WpfApp1/ViewModel/InvertedBoolToBoolConverter.cs
