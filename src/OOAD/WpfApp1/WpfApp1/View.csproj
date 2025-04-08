@@ -58,9 +58,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\ContactControl.xaml.cs">
+      <DependentUpon>ContactControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\BaseCommand.cs" />
     <Compile Include="ViewModel\BoolToVisibilityConverterVM.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
+    <Page Include="Controls\ContactControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -105,6 +112,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Properties\placeholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\contact_32x32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
