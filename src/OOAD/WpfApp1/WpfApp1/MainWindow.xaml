@@ -41,7 +41,7 @@
 
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock Text="Find:" VerticalAlignment="Center" Margin="8,0,0,0"/>
-                <TextBox Margin="3" Width="183" />
+                <TextBox Margin="3" Width="261" />
             </StackPanel>
 
             <ListBox Grid.Row="1" Margin="3" 
@@ -50,10 +50,10 @@
                      ItemTemplate="{StaticResource contactTemplate}" />
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="3" HorizontalAlignment="Center">
-                <Button Content="Add" Height="25" Width="95" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                <Button Content="Add" Height="25" Width="93" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                         Command="{Binding AddCommand}" 
                         IsEnabled="{Binding CanAdd}" />
-                <Button Content="Edit" Height="25" Width="94" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                <Button Content="Edit" Height="25" Width="93" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                         Command="{Binding EditCommand}" 
                         IsEnabled="{Binding CanEditOrRemove}" />
                 <Button Content="Remove" Height="25" Width="93" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 

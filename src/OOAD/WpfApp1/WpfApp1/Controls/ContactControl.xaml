@@ -29,7 +29,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Image Source="/Properties/placeholder.png" Width="100" Height="100" Margin="3" Grid.Column="0"/>
+                <Image Source="/Properties/placeholder.png" Width="100" Height="100" Margin="3,10,3,46" Grid.Column="0"/>
 
                 <StackPanel Grid.Column="1" Margin="3">
                     <TextBlock Text="Name:" />
