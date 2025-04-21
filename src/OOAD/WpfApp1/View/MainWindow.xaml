@@ -1,16 +1,16 @@
-﻿<Window x:Class="WpfApp1.MainWindow"
+﻿<Window x:Class="View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp1"
-        xmlns:vm="clr-namespace:View.ViewModel"
-        xmlns:controls="clr-namespace:WpfApp1.Controls"
+        xmlns:local="clr-namespace:View"
+        xmlns:controls="clr-namespace:View.Controls"
+        xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
         mc:Ignorable="d"
         Title="Contacts" Height="460" Width="810">
 
     <Window.Resources>
-        <vm:BoolToVisibilityConverterVM x:Key="BoolToVisibilityConverterVM"/>
+        <local:BoolToVisibilityConverterVM x:Key="BoolToVisibilityConverterVM"/>
         <DataTemplate x:Key="contactTemplate">
             <StackPanel Orientation="Horizontal" Margin="3">
                 <Image Source="/Properties/contact_32x32.png" Width="32" Height="32" Margin="0,0,8,0" VerticalAlignment="Center"/>
@@ -55,10 +55,10 @@
                         IsEnabled="{Binding CanAdd}" />
                 <Button Content="Edit" Height="25" Width="93" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                         Command="{Binding EditCommand}" 
-                        IsEnabled="{Binding CanEditOrRemove}" />
+                        IsEnabled="{Binding CanEdit}" />
                 <Button Content="Remove" Height="25" Width="93" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                         Command="{Binding RemoveCommand}" 
-                        IsEnabled="{Binding CanEditOrRemove}" />
+                        IsEnabled="{Binding CanRemove}" />
             </StackPanel>
         </Grid>
 
