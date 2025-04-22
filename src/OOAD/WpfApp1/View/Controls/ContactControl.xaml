@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="WpfApp1.Controls.ContactControl"
+﻿<UserControl x:Class="View.Controls.ContactControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WpfApp1.Controls"
+             xmlns:local="clr-namespace:View.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -29,7 +29,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Image Source="/Properties/placeholder.png" Width="100" Height="100" Margin="3" Grid.Column="0"/>
+                <Image Source="/Properties/placeholder.png" Width="100" Height="100" Margin="3,10,3,46" Grid.Column="0"/>
 
                 <StackPanel Grid.Column="1" Margin="3">
                     <TextBlock Text="Name:" />

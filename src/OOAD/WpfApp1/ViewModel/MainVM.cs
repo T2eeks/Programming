@@ -4,19 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
-using View.Model;
+using Model;
 using System.Windows.Input;
-using View.Model.Services;
+using Model.Services;
 using System.Collections.ObjectModel;
-using WpfApp1.ViewModel;
 using System.Text.RegularExpressions;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
-namespace View.ViewModel
+namespace ViewModel
 {
     /// <summary>
     /// Главная ViewModel для управления контактными данными.
     /// </summary>
-    public class MainVM : INotifyPropertyChanged, IDataErrorInfo
+    public class MainVM : ObservableObject, IDataErrorInfo
     {
         private Contact _selectedContact;
         private bool _isEditing;
@@ -43,27 +44,22 @@ namespace View.ViewModel
         /// <summary>
         /// Получает команду добавления нового контакта.
         /// </summary>
-        public ICommand AddCommand { get; }
+        public RelayCommand AddCommand { get; }
 
         /// <summary>
         /// Получает команду применения изменений при добавлении или редактировании контакта.
         /// </summary>
-        public ICommand ApplyCommand { get; }
+        public RelayCommand ApplyCommand { get; }
 
         /// <summary>
         /// Получает команду редактирования выбранного контакта.
         /// </summary>
-        public ICommand EditCommand { get; }
+        public RelayCommand EditCommand { get; }
 
         /// <summary>
         /// Получает команду удаления выбранного контакта.
         /// </summary>
-        public ICommand RemoveCommand { get; }
-
-        /// <summary>
-        /// Событие, уведомляющее об изменении свойства.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public RelayCommand RemoveCommand { get; }
 
         /// <summary>
         /// Получает или задает временное имя для редактирования или добавления.
@@ -73,12 +69,13 @@ namespace View.ViewModel
             get { return _tempName; }
             set
             {
-                _tempName = value;
-                if (!string.IsNullOrEmpty(value))
-                    _isNameTouched = true;
-                OnPropertyChanged(nameof(TempName));
-                OnPropertyChanged(nameof(IsContactValid));
-                ValidateProperty(nameof(TempName), value);
+                if (SetProperty(ref _tempName, value))
+                {
+                    if (!string.IsNullOrEmpty(value))
+                        _isNameTouched = true;
+                    ValidateProperty(nameof(TempName), value);
+                    OnPropertyChanged(nameof(IsContactValid)); 
+                }
             }
         }
 
@@ -90,12 +87,13 @@ namespace View.ViewModel
             get { return _tempPhoneNumber; }
             set
             {
-                _tempPhoneNumber = value;
-                if (!string.IsNullOrEmpty(value))
-                    _isPhoneNumberTouched = true; ;
-                ValidateProperty(nameof(TempPhoneNumber), value);
-                OnPropertyChanged(nameof(TempPhoneNumber));
-                OnPropertyChanged(nameof(IsContactValid));
+                if (SetProperty(ref _tempPhoneNumber, value))
+                {
+                    if (!string.IsNullOrEmpty(value))
+                        _isPhoneNumberTouched = true;
+                    ValidateProperty(nameof(TempPhoneNumber), value);
+                    OnPropertyChanged(nameof(IsContactValid));
+                }
             }
         }
 
@@ -107,12 +105,13 @@ namespace View.ViewModel
             get { return _tempEmail; }
             set
             {
-                _tempEmail = value;
-                if (!string.IsNullOrEmpty(value))
-                    _isEmailTouched = true;
-                OnPropertyChanged(nameof(TempEmail));
-                ValidateProperty(nameof(TempEmail), value);
-                OnPropertyChanged(nameof(IsContactValid));
+                if (SetProperty(ref _tempEmail, value))
+                {
+                    if (!string.IsNullOrEmpty(value))
+                        _isEmailTouched = true;
+                    ValidateProperty(nameof(TempEmail), value);
+                    OnPropertyChanged(nameof(IsContactValid));
+                }
             }
         }
 
@@ -124,7 +123,7 @@ namespace View.ViewModel
             get { return _selectedContact; }
             set
             {
-                if (_selectedContact != value)
+                if (SetProperty(ref _selectedContact, value))
                 {
                     if (_isAddingNewContact || _isEditing)
                     {
@@ -356,7 +355,7 @@ namespace View.ViewModel
         /// Добавляет новый контакт в коллекцию.
         /// </summary>
         /// <param name="obj">Параметр команды (не используется).</param>
-        private void AddContact(object obj)
+        private void AddContact()
         {
             _isAddingNewContact = true;
             IsApplyButtonVisible = true;
@@ -378,7 +377,7 @@ namespace View.ViewModel
         /// Разрешает редактирование выбранного контакта.
         /// </summary>
         /// <param name="obj">Параметр команды (не используется).</param>
-        private void EditContact(object obj)
+        private void EditContact()
         {
             if (SelectedContact != null)
             {
@@ -400,7 +399,7 @@ namespace View.ViewModel
         /// Применяет изменения при добавлении или редактировании контакта.
         /// </summary>
         /// <param name="obj">Параметр команды (не используется).</param>
-        private void ApplyContact(object obj)
+        private void ApplyContact()
         {
             if (string.IsNullOrWhiteSpace(TempName) || string.IsNullOrWhiteSpace(TempPhoneNumber) || string.IsNullOrWhiteSpace(TempEmail))
                 return;
@@ -435,7 +434,7 @@ namespace View.ViewModel
         /// Удаляет выбранный контакт из коллекции.
         /// </summary>
         /// <param name="obj">Параметр команды (не используется).</param>
-        private void RemoveContact(object obj)
+        private void RemoveContact()
         {
             if (SelectedContact != null)
             {
@@ -494,15 +493,6 @@ namespace View.ViewModel
         }
 
         /// <summary>
-        /// Вызывает событие PropertyChanged для обновления привязанных данных.
-        /// </summary>
-        /// <param name="propertyName">Имя измененного свойства.</param>
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        /// <summary>
         /// Инициализирует новый экземпляр класса MainVM.
         /// </summary>
         public MainVM()
@@ -510,10 +500,10 @@ namespace View.ViewModel
             Contacts = new ObservableCollection<Contact>();
             _serializer = new ContactSerializer();
 
-            AddCommand = new BaseCommand(AddContact, (obj) => CanAdd);
-            ApplyCommand = new BaseCommand(ApplyContact);
-            EditCommand = new BaseCommand(EditContact, (obj) => CanEdit);
-            RemoveCommand = new BaseCommand(RemoveContact, (obj) => CanRemove);
+            AddCommand = new RelayCommand(AddContact, () => CanAdd);
+            ApplyCommand = new RelayCommand(ApplyContact);
+            EditCommand = new RelayCommand(EditContact, () => CanEdit);
+            RemoveCommand = new RelayCommand(RemoveContact, () => CanRemove);
 
             LoadContacts();
         }

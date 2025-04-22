@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace View.Model
+namespace Model
 {
     /// <summary>
     /// Класс, представляющий контакт человка.

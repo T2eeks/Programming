@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApp1.Controls
+namespace View.Controls
 {
     /// <summary>
     /// Логика взаимодействия для ContactControl.xaml

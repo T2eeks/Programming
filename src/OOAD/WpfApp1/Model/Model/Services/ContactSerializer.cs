@@ -10,12 +10,12 @@ using System.Windows;
 using System.CodeDom;
 using System.Security.Cryptography;
 
-namespace View.Model.Services
+namespace Model.Services
 {
     /// <summary>
     /// Класс, отвечающий за сериализацию и десериализацию контактов.
     /// </summary>
-    internal class ContactSerializer
+    public class ContactSerializer
     {
 
         /// <summary>

@@ -12,11 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using View.ViewModel;
+using ViewModel;
 
 
-
-namespace WpfApp1
+namespace View
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
@@ -26,7 +25,6 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainVM();
         }
     }
 }
