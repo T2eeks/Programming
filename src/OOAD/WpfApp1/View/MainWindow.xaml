@@ -10,7 +10,7 @@
         Title="Contacts" Height="460" Width="810">
 
     <Window.Resources>
-        <local:BoolToVisibilityConverterVM x:Key="BoolToVisibilityConverterVM"/>
+        <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverterVM"/>
         <DataTemplate x:Key="contactTemplate">
             <StackPanel Orientation="Horizontal" Margin="3">
                 <Image Source="/Properties/contact_32x32.png" Width="32" Height="32" Margin="0,0,8,0" VerticalAlignment="Center"/>

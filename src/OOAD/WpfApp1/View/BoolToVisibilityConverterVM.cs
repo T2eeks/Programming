@@ -8,7 +8,7 @@ namespace View
     /// <summary>
     /// Конвертер, преобразующий значение типа bool в Visibility.
     /// </summary>
-    public class BoolToVisibilityConverterVM : IValueConverter
+    public class BoolToVisibilityConverter : IValueConverter
     {
         /// <summary>
         /// Преобразует bool в Visibility.
